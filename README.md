@@ -17,6 +17,7 @@
 * [HORIZONTAL MOTION](#hor)
 * [VERTICAL MOTION: LOOKING UP AND DOWN ](#ver)  
 * [SHADING](#shading)
+* [Other resources](#other)
 
 ## Description <a name="description"></a>
 *(very soon)*  
@@ -394,5 +395,9 @@ Ray-casting лучей хорошо подходит здесь, потому ч
 Original link: [click](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/)  
   
 [Up to table of contents](#table)  
+
+## Other resources <a name="other"></a>  
+* [Raycasting](https://lodev.org/cgtutor/raycasting.html)  
+* [Minilibx](https://github.com/keuhdall/images_example)  
   
 **Author:** *[Mark Veligod](https://github.com/markveligod)* 
