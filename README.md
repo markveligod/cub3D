@@ -399,5 +399,6 @@ Original link: [click](https://permadi.com/1996/05/ray-casting-tutorial-table-of
 ## Other resources <a name="other"></a>  
 * [Raycasting](https://lodev.org/cgtutor/raycasting.html)  
 * [Minilibx](https://github.com/keuhdall/images_example)  
+* [Man Minilibx](https://qst0.github.io/ft_libgfx/man_mlx.html)
   
 **Author:** *[Mark Veligod](https://github.com/markveligod)* 
