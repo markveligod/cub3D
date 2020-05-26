@@ -80,6 +80,7 @@ typedef struct	s_link
 	display		*dis;
 }				link;
 
-void			error(char *str)
+void			error(char *str);
+char			*ft_strjoin_upd(char *s1, char *s2, int flag);
 
 #endif

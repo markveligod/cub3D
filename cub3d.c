@@ -52,7 +52,8 @@ void	get_param_file(int fd, link *param)
 	}
 	if (line[i] == '1' || line[i] == '0' || line[i] == '2')
 	{
-		line = 
+		line = clean_map_line(line);
+		param->area->liner_map = ft_strjoin_upd(param->area->linear_map, line, 1);
 	}
 }
 
