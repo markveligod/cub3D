@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+#include <stdio.h>
 /*
 	Check for compliance with the format
 */
@@ -26,10 +26,12 @@ int		check_filename(char *str, int size)
 */
 void	get_calloc_param(t_link *param)
 {
-	if(!(param->area = ft_calloc(sizeof(t_area), 1)))
+	if((param->area = ft_calloc(sizeof(t_area), 1)))
+		param->area->linear_map = ft_strdup(" ");
+	else
 		error("ERROR: failed to execute 'calloc' for 'area'");
-	if(!(param->display = ft_calloc(sizeof(t_display), 1)))
-		error("ERROR: failed to execute 'calloc' for 'display'");
+//	if(!(param->display = ft_calloc(sizeof(t_display), 1)))
+//		error("ERROR: failed to execute 'calloc' for 'display'");
 }
 
 /*
@@ -56,19 +58,19 @@ void	get_linear_map(int fd, t_link *param)
 			{
 				if (line[i] == ' ')
 					continue ;
-				if (check_al_param(line, param))
+				if (check_al_param((line + i), param))
 					break ;
 				if (line[i] == '1' || line[i] == '0' || line[i] == '2')
 				{
-					line = clean_map_line(line);
-					param->area->linear_map = ft_strjoin_upd(param->area->linear_map, line, 1);
+					//line = clean_map_line(line);
+					param->area->linear_map = ft_strjoin(param->area->linear_map, line);
 					break ;
 				}
 			}
 		}
 	}
 }
-#include <stdio.h>
+
 int     main(int ac, char **av)
 {
 	int     fd;
@@ -78,13 +80,11 @@ int     main(int ac, char **av)
 	if (ac == 2 && check_filename(av[1], ft_strlen(av[1])))
 	{
 		fd = open(av[1], O_RDONLY);
-		init_param(&param);
-		param.display->mlx_ptr = mlx_init();
+		get_calloc_param(&param);
 		get_linear_map(fd, &param);
 		param.area->brut_map = ft_split(param.area->linear_map, '$');
+		printf("MAP: %s\n", param.area->linear_map);
 		printf("R: X - %d Y - %d\nNO: %s\nSO: %s\nWE: %s\nEA: %s\nS: %s\n", param.area->x, param.area->y, param.area->north, param.area->south, param.area->west, param.area->east, param.area->sprite);
-		for(int i = 0; i < 12; i++)
-			printf("INDEX %d : %s", i, param.area->brut_map[i]);
 	}
 	close(fd);
 	return (0);

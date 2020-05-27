@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <errno.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include "libft/libft.h"
 
 typedef	struct	s_area
@@ -33,24 +33,14 @@ typedef	struct	s_area
 
 }				t_area;
 
-typedef	struct	s_display
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-}				t_display;
-
 typedef struct	s_link
 {
 	t_area		*area;
-	t_display	*display;
 }				t_link;
 
 void			error(char *str);
-char			*ft_strjoin_upd(char *s1, char *s2, int flag);
-int				get_size_line(char *str);
 void			get_map_file(int fd, t_link *param);
 char			*clean_map_line(char *line);
-int				is_map_flag(char c);
 int				check_al_param(char *line, t_link *param);
 
 

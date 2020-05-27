@@ -12,12 +12,6 @@
 
 #include "cub3d.h"
 
-int		is_map_flag(char c)
-{
-	return(c == '0' || c == '1' || c == '2' || c == 'N' ||
-	c == 'S' || c == 'W' || c == 'E' || c == ' ');
-}
-
 char	*clean_map_line(char *line)
 {
 	char	*clean_line;
@@ -27,18 +21,17 @@ char	*clean_map_line(char *line)
 
 	i = 0;
 	j = 0;
-	size = get_size_line(line);
-	if (!(clean_line = malloc(sizeof(char) * (size + 1))))
+	size = ft_strlen(line);
+	if (!(clean_line = malloc(sizeof(char) * (size + 2))))
 		error("ERROR: map_line didn't malloc");
 	while (line[i])
 	{
-		if (!is_map_flag(line[i]))
-			error("ERROR: invalid character in the file");
-		clean_line[j] = line[i];
-		i++;
+		if (line[i] != '\n')
+			clean_line[j] = line[i];
 		j++;
+		i++;
 	}
 	clean_line[j] = '$';
-	clean_line[size + 1] = '\0';
+	clean_line[size + 2] = '\0';
 	return (clean_line);	
 }
