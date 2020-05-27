@@ -1,4 +1,13 @@
-R    900 600 
+ R    900 600 
+
+    NO ./textures/stone.xpm     
+ SO ./textures/mossy.xpm   
+   WE ./textures/redbrick.xpm  
+EA ./textures/wood.xpm  
+S  ./textures/pillar.xpm    
+
+C     155, 158, 156 
+F  132, 195, 196
 
  111111111111111111111111111111
 10000000000000000000100000000011111

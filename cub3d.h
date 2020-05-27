@@ -25,11 +25,6 @@ typedef	struct	s_area
 {
 	char		*linear_map;
 	char		**brut_map;
-	char		**map;
-	double		pos_x;
-	double		pos_y;
-	int			max_x;
-	int			max_y;
 	int			x;
 	int			y;
 	char		*north;
@@ -37,50 +32,27 @@ typedef	struct	s_area
 	char		*east;
 	char		*west;
 	char		*sprite;
-	int			c_col;
-	int			f_col;
-}				area;
+
+}				t_area;
 
 typedef	struct	s_display
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	double		dirx;
-	double		diry;
-	double		planx;
-	double		plany;
-	double		camx;
-	int			screenx;
-	double		raydirx;
-	double		raydiry;
-	int			mapx;
-	int			mapy;
-	double		sidedistx;
-	double		sidedisty;
-	double		deltadistx;
-	double		deltadisty;
-	double		walldist;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			side;
-	int			lineheight;
-	int			drawstart;
-	int			drawend;
-	double		wallx;
-	int			textx;
-	int			texty;
-	double		step;
-	double		textpos;
-}				display;
+}				t_display;
 
 typedef struct	s_link
 {
-	scene		*area;
-	display		*dis;
-}				link;
+	t_area		*area;
+	t_display	*display;
+}				t_link;
 
 void			error(char *str);
 char			*ft_strjoin_upd(char *s1, char *s2, int flag);
+int				get_size_line(char *str);
+void			get_map_file(int fd, t_link *param);
+char			*clean_map_line(char *line);
+int				is_map_flag(char c);
+
 
 #endif
