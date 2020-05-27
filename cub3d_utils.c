@@ -44,10 +44,6 @@ int		check_al_param(char *line, t_link *param)
 		push_text((line + 2), param, 4);
 	else if (line[0] == 'S' && line[1] != 'O')
 		push_text((line + 1), param, 5);
-	else if (line[0] == 'F')
-		push_f_col((line + 1), param);
-	else if (line[0] == 'C')
-		push_c_col((line + 1), param);
 	else
 		return (0);
 	return (1);

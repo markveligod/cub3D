@@ -14,8 +14,6 @@
 # define CUB3D_H
 
 # include <fcntl.h>
-# include <math.h>
-# include <string.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <mlx.h>
@@ -53,6 +51,7 @@ int				get_size_line(char *str);
 void			get_map_file(int fd, t_link *param);
 char			*clean_map_line(char *line);
 int				is_map_flag(char c);
+int				check_al_param(char *line, t_link *param);
 
 
 #endif

@@ -39,6 +39,6 @@ char	*clean_map_line(char *line)
 		j++;
 	}
 	clean_line[j] = '$';
-	clean_line[size] = '\0';
+	clean_line[size + 1] = '\0';
 	return (clean_line);	
 }

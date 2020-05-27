@@ -68,7 +68,7 @@ void	get_linear_map(int fd, t_link *param)
 		}
 	}
 }
-
+#include <stdio.h>
 int     main(int ac, char **av)
 {
 	int     fd;
@@ -82,7 +82,9 @@ int     main(int ac, char **av)
 		param.display->mlx_ptr = mlx_init();
 		get_linear_map(fd, &param);
 		param.area->brut_map = ft_split(param.area->linear_map, '$');
-
+		printf("R: X - %d Y - %d\nNO: %s\nSO: %s\nWE: %s\nEA: %s\nS: %s\n", param.area->x, param.area->y, param.area->north, param.area->south, param.area->west, param.area->east, param.area->sprite);
+		for(int i = 0; i < 12; i++)
+			printf("INDEX %d : %s", i, param.area->brut_map[i]);
 	}
 	close(fd);
 	return (0);
