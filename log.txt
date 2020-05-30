@@ -1,1 +1,0 @@
-ERROR: invalid character in the file
