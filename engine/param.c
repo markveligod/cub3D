@@ -8,14 +8,14 @@ int		check_num_map(char c)
 void	get_init_param(t_link *param)
 {
 	if (!(param->area = (t_area *)ft_calloc(sizeof(t_area), 1)))
-		error("Something went wrong with scene initialization (-_-) ");
+		error("Something went wrong with area initialization (-_-) ");
+	if (!(param->display = (t_display *)ft_calloc(sizeof(t_display), 1)))
+		error("Something went wrong with display initialization (-_-) ");
 }
 
 void	get_sort_param(char *line, t_link *param)
 {
-	if (line[0] == '\0')
-		return ;
-	else if (line[0] == 'R')
+	if (line[0] == 'R')
 		push_size_xy((line + 1), param);
 	else if (line[0] == 'N' && line[1] == 'O')
 		push_text((line + 2), param, 1);
@@ -28,7 +28,7 @@ void	get_sort_param(char *line, t_link *param)
 	else if (line[0] == 'S' && line[1] != 'O')
 		push_text((line + 1), param, 5);
 	else
-		error("Unrecognized element in file");
+		error("Unknown char !!!");
 }
 
 void	get_param_file(int fd, t_link *param)
@@ -37,6 +37,7 @@ void	get_param_file(int fd, t_link *param)
 	int		count;
 	int		i;
 
+	count = 1;
 	while (count > 0)
 	{
 		i = 0;
@@ -45,8 +46,10 @@ void	get_param_file(int fd, t_link *param)
 		while (line[i] == ' ')
 			i++;
 		if (check_num_map(line[i]))
-			break;
-		get_sort_param(&line[i], param);		
+			break ;
+		if (line[i] == 13)
+			continue ;
+		get_sort_param(&line[i], param);
 	}
 	if(check_num_map(line[i]))
 	{

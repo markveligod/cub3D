@@ -7,7 +7,6 @@ int		check_filename(char *str, int size)
 }
 
 
-
 int		main(int ac, char **av)
 {
 	int		fd;
@@ -19,5 +18,9 @@ int		main(int ac, char **av)
 		fd = open(av[1], O_RDONLY);
 		get_init_param(&param);
 		get_param_file(fd, &param);
+		param.display->mlx_ptr = mlx_init();
+		start_game(&param);
 	}
+	close(fd);
+	return (0);
 }

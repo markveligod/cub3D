@@ -3,7 +3,7 @@
 int		check_map_char(char c)
 {
 	return (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S'
-		|| c == 'W' || c == 'E' || c == ' ')
+		|| c == 'W' || c == 'E' || c == ' ');
 }
 
 int		check_size(char *str)
@@ -15,7 +15,7 @@ int		check_size(char *str)
 	size = 0;
 	while (str[i])
 	{
-		if (is_map_char(str[i]))
+		if (check_map_char(str[i]))
 			size++;
 		i++;
 	}
@@ -36,11 +36,12 @@ char	*get_map_param(char *line)
         error("Something went wrong with Map allocation !(-_-)! ");
     while (line[i])
     {
-        if (!check_map_char(line[i]))
-            error("Unknown character in the file !()!");
-        array[j] = line[i];
+		if (check_map_char(line[i]))
+		{
+			array[j] = line[i];
+			j++;
+		}
         i++;
-        j++;
     }
     array[j] = '$';
     array[size + 1] = '\0';

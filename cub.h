@@ -1,11 +1,14 @@
 #ifndef CUB_H
 # define CUB_H
-# define BUFFER_SIZE 32
+# define BUFFER_SIZE 16
 
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <errno.h>
+# include <mlx.h>
+
+#include <stdio.h> //any time
 
 typedef	struct	s_area
 {
@@ -20,16 +23,23 @@ typedef	struct	s_area
 	char		*sprite;
 }				t_area;
 
+typedef struct	s_display
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+}				t_display;
+
 typedef struct	s_link
 {
 	t_area		*area;
+	t_display	*display;
 }				t_link;
 
 /*
 	Utils prototype
 */
 int		get_next_line(int fd,char **line);
-char	*ft_strjoin(char *remains, char *buffer);
+char	*ft_strjoin(char *s1, char *s2);
 int		ft_strlen(char *str);
 void	*ft_calloc(size_t number, size_t size);
 void	ft_bzero(void *s, size_t n);
@@ -39,6 +49,9 @@ void	ft_putchar_fd(char c, int fd);
 char	*ft_strdup(const char *str);
 int		ft_isspace(char c);
 int		ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 /*
 	error (*-*)
