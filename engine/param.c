@@ -7,10 +7,20 @@ int		check_num_map(char c)
 
 void	get_init_param(t_link *param)
 {
+	int i;
+
+	i = -1;
 	if (!(param->area = (t_area *)ft_calloc(sizeof(t_area), 1)))
 		error("Something went wrong with area initialization (-_-) ");
 	if (!(param->display = (t_display *)ft_calloc(sizeof(t_display), 1)))
 		error("Something went wrong with display initialization (-_-) ");
+	if (!(param->image = (t_image *)ft_calloc(sizeof(t_image), 1)))
+		error("Something went wrong with image initialization (-_-) ");
+	/*
+	while (++i <= 5)
+		if (!(param->image[i] = (t_image *)ft_calloc(sizeof(t_image), 1)))
+			error("Something went wrong with image cicle initialization (-_-)");
+	*/
 }
 
 void	get_sort_param(char *line, t_link *param)
@@ -27,6 +37,10 @@ void	get_sort_param(char *line, t_link *param)
 		push_text((line + 2), param, 4);
 	else if (line[0] == 'S' && line[1] != 'O')
 		push_text((line + 1), param, 5);
+	else if (line[0] == 'F')
+		push_floor_color((line + 1), p);
+	else if (line[0] == 'C')
+		push_ceilling_color((line + 1), p);
 	else
 		error("Unknown char !!!");
 }

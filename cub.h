@@ -14,25 +14,44 @@ typedef	struct	s_area
 {
 	char		*linear_map;
 	char		**brut_map;
-	int			x;
-	int			y;
+	short int	x;
+	short int	y;
 	char		*north;
 	char		*south;
 	char		*east;
 	char		*west;
 	char		*sprite;
+	short int	c_red_color;
+	short int	c_green_color;
+	short int	c_blue_color;
+	short int	f_red_color;
+	short int	f_green_color;
+	short int	f_blue_color;
 }				t_area;
 
 typedef struct	s_display
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	short int	screen;
 }				t_display;
+
+typedef struct	s_image
+{
+	void		*image_ptr;
+	char		*image_data;
+	int			depth;
+	int			size_line;
+	int			endian;
+	int			width;
+	int			height;
+}				t_image;
 
 typedef struct	s_link
 {
 	t_area		*area;
 	t_display	*display;
+	t_image		*image;
 }				t_link;
 
 /*
@@ -66,10 +85,17 @@ void	get_param_file(int fd, t_link *param);
 void	get_sort_param(char *line, t_link *param);
 void	push_size_xy(char *line, t_link *param);
 void	push_text(char *line, t_link *param, int flag);
+void	push_floor_color(char *line, t_link *param);
+void	push_ceilling_color(char *line, t_link *param);
 
 /*
 	map prototype
 */
 char	*get_map_param(char *line);
+
+/*
+	draw prototype
+*/
+void	start_draw(t_link *param)
 
 #endif

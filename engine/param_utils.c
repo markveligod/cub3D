@@ -39,3 +39,41 @@ void	push_size_xy(char *line, t_link *param)
 	else if (param->area->y < 1)
 		error("Resolution is too low");
 }
+
+void	push_floor_color(char *line, t_link *param)
+{
+	int i;
+
+	i = 0;
+	param->area->f_red_color = ft_atoi(line);
+	while (line[i] != ',')
+		i++;
+	param->area->f_green_color = ft_atoi(line + i + 1);
+	i++;
+	while (line[i] != ',')
+		i++;
+	param->area->f_blue_color = ft_atoi(line + i + 1);
+	if (!(param->area->f_red_color >= 0 && param->area->f_red_color <= 255) &&
+	(param->area->f_green_color >= 0 && param->area->f_green_color <= 255) &&
+	(param->area->f_blue_color >= 0 && param->area->f_blue_color <= 255))
+		error("RGB values should be between 0 and 255");
+}
+
+void	push_ceilling_color(char *line, t_link *param)
+{
+	int i;
+
+	i = 0;
+	param->area->c_red_color = ft_atoi(line);
+	while (line[i] != ',')
+		i++;
+	param->area->c_green_color = ft_atoi(line + i + 1);
+	i++;
+	while (line[i] != ',')
+		i++;
+	param->area->c_blue_color = ft_atoi(line + i + 1);
+	if (!(param->area->c_red_color >= 0 && param->area->c_red_color <= 255) &&
+	(param->area->c_green_color >= 0 && param->area->c_green_color <= 255) &&
+	(param->area->c_blue_color >= 0 && param->area->c_blue_color <= 255))
+		error("RGB values should be between 0 and 255");
+}
