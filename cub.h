@@ -94,8 +94,9 @@ void	push_ceilling_color(char *line, t_link *param);
 char	*get_map_param(char *line);
 
 /*
-	draw prototype
+ * game and	draw prototype
 */
-void	start_draw(t_link *param)
+void	start_game(t_link *param);
+void	start_draw(t_link *param);
 
 #endif

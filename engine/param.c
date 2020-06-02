@@ -38,9 +38,9 @@ void	get_sort_param(char *line, t_link *param)
 	else if (line[0] == 'S' && line[1] != 'O')
 		push_text((line + 1), param, 5);
 	else if (line[0] == 'F')
-		push_floor_color((line + 1), p);
+		push_floor_color((line + 1), param);
 	else if (line[0] == 'C')
-		push_ceilling_color((line + 1), p);
+		push_ceilling_color((line + 1), param);
 	else
 		error("Unknown char !!!");
 }
