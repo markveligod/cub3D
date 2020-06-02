@@ -4,6 +4,7 @@
 
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include <stdlib.h>
 # include <errno.h>
 # include <mlx.h>
@@ -33,7 +34,17 @@ typedef struct	s_display
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	double		dirx;
+	double		diry;
+	double		pos_x;
+	double		pos_y;
+	double		planx;
+	double		plany;
 	short int	screen;
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
+
 }				t_display;
 
 typedef struct	s_image
@@ -98,5 +109,7 @@ char	*get_map_param(char *line);
 */
 void	start_game(t_link *param);
 void	start_draw(t_link *param);
+int		check_char_player(t_link *param);
+void	set_player(t_link *param, char c);
 
 #endif
