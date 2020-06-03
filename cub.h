@@ -65,10 +65,10 @@ typedef struct	s_image
 	void		*image_ptr;
 	char		*image_data;
 	int			depth;
-	short int	size_line;
-	short int	endian;
-	short int	width;
-	short int	height;
+	int			size_line;
+	int			endian;
+	int			width;
+	int			height;
 }				t_image;
 
 typedef struct	s_link
