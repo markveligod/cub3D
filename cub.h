@@ -126,5 +126,11 @@ int		check_char_player(t_link *param);
 void	set_player(t_link *param, char c);
 void	which_wall(t_link *param);
 void	set_draw(t_link *param);
+void	forward(t_link *param);
+void	backward(t_link *param);
+void	left(t_link *param);
+void	right(t_link *param);
+void	rotate(t_link *param, int key);
+
 
 #endif
