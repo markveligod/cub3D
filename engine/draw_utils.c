@@ -21,3 +21,75 @@ int		check_char_player(t_link *param)
 	}
 	return (0);
 }
+
+void	which_wall(t_link *param)
+{
+	param->display->hit = 1;
+	if (!param->display->side)
+	{
+		if (param->display->raydirx < 0)
+			param->display->side = 1;
+		else if (param->display->raydirx > 0)
+			param->display->side = 2;
+	}
+	else if (param->display->side == 1)
+	{
+		if (param->display->raydiry < 0)
+			param->display->side = 3;
+		else if (param->display->raydiry > 0)
+			param->display->side = 4;
+	}
+}
+
+int		draw_ceiling(t_link *param, int y)
+{
+	while (y < param->display->drawstart)
+	{
+		param->image->image_data
+			[param->display->screen * param->image->depth / 8 + param->image->size_line * y] =
+			param->area->c_red_color;
+		param->image->image_data
+			[(param->display->screen * param->image->depth / 8 + param->image->size_line * y) + 1] =
+			param->area->c_green_color;
+		param->image->image_data
+			[(param->display->screen * param->image->depth / 8 + param->image->size_line * y) + 2] =
+			param->area->c_blue_color;
+		y++;
+	}
+	return (y);
+}
+
+void	draw_floor(t_link *param, int y)
+{
+	while (y < param->area->y)
+	{
+		param->image->image_data
+			[param->display->screen * param->image->depth / 8 + param->image->size_line * y] =
+			param->area->f_red_color;
+		param->image->image_data
+			[(param->display->screen * param->image->depth / 8 + param->image->size_line * y) + 1] =
+			param->area->f_green_color;
+		param->image->image_data
+			[(param->display->screen * param->image->depth / 8 + param->image->size_line * y) + 2] =
+			param->area->f_blue_color;
+		y++;
+	}
+}
+
+void	set_draw(t_link *param)
+{
+	int	y;
+
+	y = 0;
+	param->display->lineheight = (int)(param->area->y / param->display->walldist);
+	param->display->drawstart = -param->display->lineheight / 2 + param->area->y / 2;
+	if (param->display->drawstart < 0)
+		param->display->drawstart = 0;
+	param->display->drawend = param->display->lineheight / 2 + param->area->y / 2;
+	if (param->display->drawend >= param->area->y)
+		param->display->drawend = param->area->y - 1;
+	y += draw_ceiling(param, y);
+	while (y < param->display->drawend)
+		y++;
+	draw_floor(param, y);
+}

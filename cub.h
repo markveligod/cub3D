@@ -44,7 +44,20 @@ typedef struct	s_display
 	double		camerax;
 	double		raydirx;
 	double		raydiry;
-
+	short int	mapx;
+	short int	mapy;
+	double		deltadistx;
+	double		deltadisty;
+	short int	stepx;
+	short int	stepy;
+	double		sidedistx;
+	double		sidedisty;
+	short int	hit;
+	short int	side;
+	double		walldist;
+	short int	lineheight;
+	short int	drawstart;
+	short int	drawend;
 }				t_display;
 
 typedef struct	s_image
@@ -52,10 +65,10 @@ typedef struct	s_image
 	void		*image_ptr;
 	char		*image_data;
 	int			depth;
-	int			size_line;
-	int			endian;
-	int			width;
-	int			height;
+	short int	size_line;
+	short int	endian;
+	short int	width;
+	short int	height;
 }				t_image;
 
 typedef struct	s_link
