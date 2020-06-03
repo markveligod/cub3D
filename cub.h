@@ -124,5 +124,7 @@ void	start_game(t_link *param);
 void	start_draw(t_link *param);
 int		check_char_player(t_link *param);
 void	set_player(t_link *param, char c);
+void	which_wall(t_link *param);
+void	set_draw(t_link *param);
 
 #endif
