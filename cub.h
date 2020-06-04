@@ -58,6 +58,11 @@ typedef struct	s_display
 	short int	lineheight;
 	short int	drawstart;
 	short int	drawend;
+	double		step;
+	double		textpos;
+	short int	textx;
+	short int	texty;
+	double		wallx;
 }				t_display;
 
 typedef struct	s_image
@@ -126,6 +131,7 @@ int		check_char_player(t_link *param);
 void	set_player(t_link *param, char c);
 void	which_wall(t_link *param);
 void	set_draw(t_link *param);
+int		draw_texture(t_link *param, int y);
 void	forward(t_link *param);
 void	backward(t_link *param);
 void	left(t_link *param);

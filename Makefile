@@ -4,7 +4,7 @@ HDRS = cub.h
 UTILS = ./utils/ft_atoi.c ./utils/ft_bzero.c ./utils/ft_calloc.c ./utils/ft_isspace.c ./utils/ft_putchar_fd.c ./utils/ft_putendl_fd.c \
 ./utils/ft_putstr_fd.c ./utils/ft_strdup.c ./utils/ft_strjoin.c ./utils/ft_strlen.c ./utils/ft_split.c ./utils/ft_strlcpy.c
 ENGINE = ./engine/error.c ./engine/get_next_line.c ./engine/map.c ./engine/param.c ./engine/param_utils.c ./cub.c ./engine/game.c \
-./engine/draw.c ./engine/draw_utils.c ./engine/game_utils.c
+./engine/draw.c ./engine/draw_utils.c ./engine/game_utils.c ./engine/texture.c
 OBJS = $(UTILS:.c=.o) $(ENGINE:.c=.o)
 
 %.o:%.c

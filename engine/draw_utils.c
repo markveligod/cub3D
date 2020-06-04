@@ -89,7 +89,6 @@ void	set_draw(t_link *param)
 	if (param->display->drawend >= param->area->y)
 		param->display->drawend = param->area->y - 1;
 	y += draw_ceiling(param, y);
-	while (y < param->display->drawend)
-		y++;
+	y += draw_texture(param, y);
 	draw_floor(param, y);
 }
