@@ -1,109 +1,109 @@
 #include "../cub.h"
 
-void	set_player(t_link *param, char c)
+void	set_player(t_link *lnk, char c)
 {
-	param->display->dirx = 0;
-	param->display->diry = 0;
-	param->display->planx = 0;
-	param->display->plany = 0;
+	lnk->dis->dirx = 0;
+	lnk->dis->diry = 0;
+	lnk->dis->planx = 0;
+	lnk->dis->plany = 0;
 	if (c == 'N')
 	{
-		param->display->plany = 0.60;
-		param->display->dirx = -1;
+		lnk->dis->plany = 0.60;
+		lnk->dis->dirx = -1;
 	}
 	else if (c == 'S')
 	{
-		param->display->plany = -0.60;
-		param->display->dirx = 1;
+		lnk->dis->plany = -0.60;
+		lnk->dis->dirx = 1;
 	}
 	else if (c == 'W')
 	{
-		param->display->planx = -0.60;
-		param->display->diry = -1;
+		lnk->dis->planx = -0.60;
+		lnk->dis->diry = -1;
 	}
 	else if (c == 'E')
 	{
-		param->display->planx = 0.60;
-		param->display->diry = 1;
+		lnk->dis->planx = 0.60;
+		lnk->dis->diry = 1;
 	}
 }
 
-void	set_walldist(t_link *param)
+void	set_walldist(t_link *lnk)
 {
-	param->display->hit = 0;
-	param->display->side = 0;
-	while (param->display->hit == 0)
+	lnk->dis->hit = 0;
+	lnk->dis->side = 0;
+	while (lnk->dis->hit == 0)
 	{
-		if (param->display->sidedistx < param->display->sidedisty)
+		if (lnk->dis->sidedistx < lnk->dis->sidedisty)
 		{
-			param->display->sidedistx += param->display->deltadistx;
-			param->display->mapx += param->display->stepx;
-			param->display->side = 0;
+			lnk->dis->sidedistx += lnk->dis->deltadistx;
+			lnk->dis->mapx += lnk->dis->stepx;
+			lnk->dis->side = 0;
 		}
 		else
 		{
-			param->display->sidedisty += param->display->deltadisty;
-			param->display->mapy += param->display->stepy;
-			param->display->side = 1;
+			lnk->dis->sidedisty += lnk->dis->deltadisty;
+			lnk->dis->mapy += lnk->dis->stepy;
+			lnk->dis->side = 1;
 		}
-		if (param->area->brut_map[param->display->mapx][param->display->mapy] == '1')
-			which_wall(param);
+		if (lnk->area->split_map[lnk->dis->mapx][lnk->dis->mapy] == '1')
+			which_wall(lnk);
 	}
-	if (param->display->side == 1 || param->display->side == 2)
-		param->display->walldist = (param->display->mapx - param->display->pos_x +
-			(1 - param->display->stepx) / 2) / param->display->raydirx;
-	else if (param->display->side == 3 || param->display->side == 4)
-		param->display->walldist = (param->display->mapy - param->display->pos_y +
-			(1 - param->display->stepy) / 2) / param->display->raydiry;
+	if (lnk->dis->side == 1 || lnk->dis->side == 2)
+		lnk->dis->walldist = (lnk->dis->mapx - lnk->dis->pos_x +
+			(1 - lnk->dis->stepx) / 2) / lnk->dis->raydirx;
+	else if (lnk->dis->side == 3 || lnk->dis->side == 4)
+		lnk->dis->walldist = (lnk->dis->mapy - lnk->dis->pos_y +
+			(1 - lnk->dis->stepy) / 2) / lnk->dis->raydiry;
 }
 
-void	set_sidedist(t_link *param)
+void	set_sidedist(t_link *lnk)
 {
-	if (param->display->raydirx < 0)
+	if (lnk->dis->raydirx < 0)
 	{
-		param->display->stepx = -1;
-		param->display->sidedistx = (param->display->pos_x - param->display->mapx) * param->display->deltadistx;
+		lnk->dis->stepx = -1;
+		lnk->dis->sidedistx = (lnk->dis->pos_x - lnk->dis->mapx) * lnk->dis->deltadistx;
 	}
 	else
 	{
-		param->display->stepx = 1;
-		param->display->sidedistx = (param->display->mapx + 1.0 - param->display->pos_x) * param->display->deltadistx;
+		lnk->dis->stepx = 1;
+		lnk->dis->sidedistx = (lnk->dis->mapx + 1.0 - lnk->dis->pos_x) * lnk->dis->deltadistx;
 	}
-	if (param->display->raydiry < 0)
+	if (lnk->dis->raydiry < 0)
 	{
-		param->display->stepy = -1;
-		param->display->deltadisty = (param->display->pos_y - param->display->mapy) * param->display->deltadisty;
+		lnk->dis->stepy = -1;
+		lnk->dis->deltadisty = (lnk->dis->pos_y - lnk->dis->mapy) * lnk->dis->deltadisty;
 	}
 	else
 	{
-		param->display->stepy = 1;
-		param->display->sidedisty = (param->display->mapy + 1.0 - param->display->pos_y) * param->display->deltadisty;
+		lnk->dis->stepy = 1;
+		lnk->dis->sidedisty = (lnk->dis->mapy + 1.0 - lnk->dis->pos_y) * lnk->dis->deltadisty;
 	}
 	
 }
 
-void	set_point(t_link *param)
+void	set_point(t_link *lnk)
 {
-	param->display->camerax = 2 * (double)param->display->screen / (double)param->area->x - 1;
-	param->display->raydirx = param->display->dirx + param->display->planx * param->display->camerax;
-	param->display->raydiry = param->display->diry + param->display->plany * param->display->camerax;
-	param->display->mapx = (int)param->display->pos_x;
-	param->display->mapy = (int)param->display->pos_y;
-	param->display->deltadistx = fabs(1 / param->display->raydirx);
-	param->display->deltadisty = fabs(1 / param->display->raydiry);
-	set_sidedist(param);
-	set_walldist(param);
+	lnk->dis->camerax = 2 * (double)lnk->dis->screen / (double)lnk->area->x - 1;
+	lnk->dis->raydirx = lnk->dis->dirx + lnk->dis->planx * lnk->dis->camerax;
+	lnk->dis->raydiry = lnk->dis->diry + lnk->dis->plany * lnk->dis->camerax;
+	lnk->dis->mapx = (int)lnk->dis->pos_x;
+	lnk->dis->mapy = (int)lnk->dis->pos_y;
+	lnk->dis->deltadistx = fabs(1 / lnk->dis->raydirx);
+	lnk->dis->deltadisty = fabs(1 / lnk->dis->raydiry);
+	set_sidedist(lnk);
+	set_walldist(lnk);
 }
 
-void	start_draw(t_link *param)
+void	start_draw(t_link *lnk)
 {
-	if (!check_char_player(param))
+	if (!check_char_player(lnk))
 		error("No direction of the player");
-	param->display->screen = 0;
-	while (param->display->screen < param->area->x)
+	lnk->dis->screen = 0;
+	while (lnk->dis->screen < lnk->area->x)
 	{
-		set_point(param);
-		set_draw(param);
-		param->display->screen++;
+		set_point(lnk);
+		set_draw(lnk);
+		lnk->dis->screen++;
 	}
 }

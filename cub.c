@@ -10,17 +10,19 @@ int		check_filename(char *str, int size)
 int		main(int ac, char **av)
 {
 	int		fd;
-	t_link	param;
+	t_link	lnk;
 
 	fd = 0;
 	if (ac == 2 && check_filename(av[1], ft_strlen(av[1])))
 	{
 		fd = open(av[1], O_RDONLY);
-		get_init_param(&param);
-		get_param_file(fd, &param);
-		param.display->mlx_ptr = mlx_init();
-		start_game(&param);
+		get_init_param(&lnk);
+		get_param_file(fd, &lnk);
+		lnk.dis->mlx_ptr = mlx_init();
+		start_game(&lnk);
 	}
+	else
+		error("Too many arguments or incorrect map name");
 	close(fd);
 	return (0);
 }

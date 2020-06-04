@@ -14,7 +14,7 @@
 typedef	struct	s_area
 {
 	char		*linear_map;
-	char		**brut_map;
+	char		**split_map;
 	short int	x;
 	short int	y;
 	char		*north;
@@ -79,8 +79,8 @@ typedef struct	s_image
 typedef struct	s_link
 {
 	t_area		*area;
-	t_display	*display;
-	t_image		*image;
+	t_display	*dis;
+	t_image		**img;
 }				t_link;
 
 /*
@@ -109,13 +109,13 @@ void	error(char *str);
 /*
 	start param prototype
 */
-void	get_init_param(t_link *param);
-void	get_param_file(int fd, t_link *param);
-void	get_sort_param(char *line, t_link *param);
-void	push_size_xy(char *line, t_link *param);
-void	push_text(char *line, t_link *param, int flag);
-void	push_floor_color(char *line, t_link *param);
-void	push_ceilling_color(char *line, t_link *param);
+void	get_init_param(t_link *lnk);
+void	get_param_file(int fd, t_link *lnk);
+void	get_sort_param(char *line, t_link *lnk);
+void	push_size_xy(char *line, t_link *lnk);
+void	push_text(char *line, t_link *lnk, int flag);
+void	push_floor_color(char *line, t_link *lnk);
+void	push_ceilling_color(char *line, t_link *lnk);
 
 /*
 	map prototype
@@ -125,18 +125,18 @@ char	*get_map_param(char *line);
 /*
  * game and	draw prototype
 */
-void	start_game(t_link *param);
-void	start_draw(t_link *param);
-int		check_char_player(t_link *param);
-void	set_player(t_link *param, char c);
-void	which_wall(t_link *param);
-void	set_draw(t_link *param);
-int		draw_texture(t_link *param, int y);
-void	forward(t_link *param);
-void	backward(t_link *param);
-void	left(t_link *param);
-void	right(t_link *param);
-void	rotate(t_link *param, int key);
+void	start_game(t_link *lnk);
+void	start_draw(t_link *lnk);
+int		check_char_player(t_link *lnk);
+void	set_player(t_link *lnk, char c);
+void	which_wall(t_link *lnk);
+void	set_draw(t_link *lnk);
+int		draw_texture(t_link *lnk, int y);
+void	forward(t_link *lnk);
+void	backward(t_link *lnk);
+void	left(t_link *lnk);
+void	right(t_link *lnk);
+void	rotate(t_link *lnk, int key);
 
 
 #endif
