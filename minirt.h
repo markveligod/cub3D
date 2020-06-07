@@ -7,6 +7,20 @@
 # include <fcntl.h>
 # include <errno.h>
 
+typedef struct	s_check
+{
+	short int	display;
+	short int	ambient;
+	short int	camera;
+	short int	light;
+	short int	sphere;
+	short int	plane;
+	short int	square;
+	short int	cylinder;
+	short int	triangle;
+}				t_check;
+
+
 typedef struct	s_display
 {
 	int			x;
@@ -82,6 +96,7 @@ typedef struct	s_triangle
 
 typedef struct	s_object
 {
+	t_check		*check;
 	t_display	*dis;
 	t_ambient	*amb;
 	t_camera	*cam;
