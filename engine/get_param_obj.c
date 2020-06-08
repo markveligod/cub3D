@@ -33,7 +33,7 @@ void	sort_param_obj(char *line, t_object *obj)
 	else if (line[i] == 'A')
 		push_param_ambient(&line[i + 1], obj);
 	else if (line[i] == 'c')
-		push_param_camera(&line[i + 1], obj);
+		obj->cam = (&line[i + 1], obj);
 	else if (line[i] == 'l')
 		push_param_light(&line[i + 1], obj);
 	else if (line[i] == 's' && line[i + 1] == 'p')
