@@ -22,7 +22,7 @@ void		get_pos_square(char *line, t_square *temp)
 	int i;
 
 	i = 0;
-	temp->pos[0] = ft_atof(line);
+	temp->pos[0] = ft_atof(&line[i]);
 	while (line[i] != ',')
 		i++;
 	temp->pos[1] = ft_atof(&line[i]);
@@ -37,7 +37,7 @@ void		get_color_square(char *line, t_square *temp)
 	int i;
 
 	i = 0;
-	temp->rgb[0] = ft_atoi(line[i]);
+	temp->rgb[0] = ft_atoi(&line[i]);
 	if (temp->rgb[0] > 255 || temp->rgb[0] < 0)
 		error("Red colors in range [0-255]");
 	while (line[i] != ',')
@@ -57,7 +57,7 @@ void		get_normal_square(char *line, t_square *temp)
 	int i;
 
 	i = 0;
-	temp->normal[0] = ft_atof(line[i]);
+	temp->normal[0] = ft_atof(&line[i]);
 	if (temp->normal[0] < -1.0 || temp->normal[0] > 1.0)
 		error("3d normalized orientation vector. In range [-1,1] (*_*)");
 	while (line[i] != ',')
@@ -86,12 +86,12 @@ void		push_param_square(char *line, t_object *obj)
 	temp->next = NULL;
 	while (line[i] == ' ')
 		i++;
-	get_pos_plane(&line[i], &temp);
+	get_pos_square(&line[i], temp);
 	while (line[i] != ' ')
 		i++;
 	while (line[i] == ' ')
 		i++;
-	get_normal_plane(&line[i], &temp);
+	get_normal_square(&line[i], temp);
 	while (line[i] != ' ')
 		i++;
 	while (line[i] == ' ')
@@ -101,6 +101,6 @@ void		push_param_square(char *line, t_object *obj)
 		error("The size cannot be negative");
 	while (line[i] != ' ')
 		i++;
-	get_color_square(&line[i], &temp);
+	get_color_square(&line[i], temp);
 	square_lstadd_back(&obj->sq, temp);
 }

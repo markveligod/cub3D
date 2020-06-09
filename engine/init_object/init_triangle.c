@@ -22,7 +22,7 @@ void		get_point_trinagle(char *line, t_triangle *temp, int check)
     int i;
 
 	i = 0;
-	temp->pos[check] = ft_atof(line);
+	temp->pos[check] = ft_atof(&line[i]);
 	while (line[i] != ',')
 		i++;
 	temp->pos[check + 1] = ft_atof(&line[i]);
@@ -37,7 +37,7 @@ void		get_color_triangle(char *line, t_triangle *temp)
 	int i;
 
 	i = 0;
-	temp->rgb[0] = ft_atoi(line[i]);
+	temp->rgb[0] = ft_atoi(&line[i]);
 	if (temp->rgb[0] > 255 || temp->rgb[0] < 0)
 		error("Red colors in range [0-255]");
 	while (line[i] != ',')
@@ -66,19 +66,19 @@ void		push_param_triangle(char *line, t_object *obj)
 	temp->next = NULL;
 	while (line[i] == ' ')
 		i++;
-	get_point_trinagle(&line[i], &temp, 0);
+	get_point_trinagle(&line[i], temp, 0);
 	while (line[i] != ' ')
 		i++;
 	while (line[i] == ' ')
 		i++;
-	get_point_trinagle(&line[i], &temp, 3);
+	get_point_trinagle(&line[i], temp, 3);
 	while (line[i] != ' ')
 		i++;
 	while (line[i] == ' ')
 		i++;
-	get_point_trinagle(&line[i], &temp, 6);
+	get_point_trinagle(&line[i], temp, 6);
 	while (line[i] != ' ')
 		i++;
-	get_color_triangle(&line[i], &temp);
+	get_color_triangle(&line[i], temp);
 	triangle_lstadd_back(&obj->tr, temp);
 }

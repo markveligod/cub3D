@@ -15,6 +15,7 @@ void	push_param_ambient(char *line, t_object *obj)
 	while (line[i] != ' ')
 		i++;
 	obj->amb->rgb[0] = ft_atoi(&line[i]);
+		printf("%s\n", line);
 	if (obj->amb->rgb[0] > 255 || obj->amb->rgb[0] < 0)
 		error("Red colors in range [0-255]");
 	while (line[i] != ',')

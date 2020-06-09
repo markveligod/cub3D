@@ -22,7 +22,7 @@ void		get_pos_sphere(char *line, t_sphere *temp)
 	int i;
 
 	i = 0;
-	temp->pos[0] = ft_atof(line);
+	temp->pos[0] = ft_atof(&line[i]);
 	while (line[i] != ',')
 		i++;
 	temp->pos[1] = ft_atof(&line[i]);
@@ -37,7 +37,7 @@ void		get_color_sphere(char *line, t_sphere *temp)
 	int i;
 
 	i = 0;
-	temp->rgb[0] = ft_atoi(line[i]);
+	temp->rgb[0] = ft_atoi(&line[i]);
 	if (temp->rgb[0] > 255 || temp->rgb[0] < 0)
 		error("Red colors in range [0-255]");
 	while (line[i] != ',')
@@ -61,12 +61,12 @@ void		push_param_sphere(char *line, t_object *obj)
 	temp = obj->sp;
 	while (temp)
 		temp = temp->next;
-	if (!(temp = (t_light *)malloc(sizeof(t_light))))
+	if (!(temp = (t_sphere *)malloc(sizeof(t_sphere))))
 		error("Memory could not be allocated in the Sphere parameter");
 	temp->next = NULL;
 	while (line[i] == ' ')
 		i++;
-	get_pos_sphere(&line[i], &temp);
+	get_pos_sphere(&line[i], temp);
 	while (line[i] != ' ')
 		i++;
 	while (line[i] == ' ')
@@ -76,6 +76,6 @@ void		push_param_sphere(char *line, t_object *obj)
 		error("The diameter cannot be negative");
 	while (line[i] != ' ')
 		i++;
-	get_color_sphere(&line[i], &temp);
+	get_color_sphere(&line[i], temp);
 	sphere_lstadd_back(&obj->sp, temp);
 }

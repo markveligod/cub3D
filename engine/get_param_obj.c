@@ -2,6 +2,8 @@
 
 void	init_check_param_obj(t_object *obj)
 {
+	if (!(obj->check = malloc(sizeof(t_check))))
+		error("Memory could not be allocated in the Check parameter");
 	obj->check->display = 0;
 	obj->check->ambient = 0;
 	obj->check->camera = 0;
@@ -26,14 +28,18 @@ void	check_param_obj(t_object *obj)
 void	sort_param_obj(char *line, t_object *obj)
 {
 	int i;
+
+	i = 0;
 	while (line[i] == ' ')
 		i++;
+	if (line[i] == '\0')
+		return ;
 	if (line[i] == 'R')
 		push_param_display(&line[i + 1], obj);
 	else if (line[i] == 'A')
 		push_param_ambient(&line[i + 1], obj);
 	else if (line[i] == 'c')
-		obj->cam = (&line[i + 1], obj);
+		push_param_camera(&line[i + 1], obj);
 	else if (line[i] == 'l')
 		push_param_light(&line[i + 1], obj);
 	else if (line[i] == 's' && line[i + 1] == 'p')
@@ -56,7 +62,6 @@ void	push_param_obj(int fd, t_object *obj)
 	char	*line;
 
 	count = 1;
-	init_check_param_obj(obj);
 	while (count > 0)
 	{
 		if ((count = get_next_line(fd, &line)) == (-1))

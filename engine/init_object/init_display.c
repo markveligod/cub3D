@@ -1,6 +1,6 @@
 #include "../../minirt.h"
 
-void    push_param_display(char *line, t_object *obj)
+void	push_param_display(char *line, t_object *obj)
 {
 	int i;
 
@@ -21,5 +21,5 @@ void    push_param_display(char *line, t_object *obj)
 		obj->dis->y = 1080;
 	if (obj->dis->y <= 0)
 		error("Invalid Display parameter Y");
-	obj->check->display++;
+	obj->check->display += 1;
 }

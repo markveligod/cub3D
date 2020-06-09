@@ -4,7 +4,10 @@ double		check_coef(int i)
 
 	coef = 0.10;
 	while (i > 0)
+	{
 		coef *= 0.10;
+		i--;
+	}
 	return (coef);
 }
 
@@ -25,7 +28,7 @@ double		check_point(char *str)
 	return (n);
 }
 
-double		ft_atof(const char *str)
+double		ft_atof(char *str)
 {
 	int		i;
 	double	n;

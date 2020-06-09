@@ -22,7 +22,7 @@ void		get_pos_light(char *line, t_light *temp)
 	int i;
 
 	i = 0;
-	temp->pos[0] = ft_atof(line);
+	temp->pos[0] = ft_atof(&line[i]);
 	while (line[i] != ',')
 		i++;
 	temp->pos[1] = ft_atof(&line[i]);
@@ -37,7 +37,7 @@ void		get_color_light(char *line, t_light *temp)
 	int i;
 
 	i = 0;
-	temp->rgb[0] = ft_atoi(line[i]);
+	temp->rgb[0] = ft_atoi(&line[i]);
 	if (temp->rgb[0] > 255 || temp->rgb[0] < 0)
 		error("Red colors in range [0-255]");
 	while (line[i] != ',')
@@ -52,7 +52,7 @@ void		get_color_light(char *line, t_light *temp)
 		error("Blue colors in range [0-255]");
 }
 
-void        push_param_light(char *line, t_object *obj)
+void		push_param_light(char *line, t_object *obj)
 {
 	int i;
 	t_light *temp;
@@ -66,7 +66,7 @@ void        push_param_light(char *line, t_object *obj)
 	temp->next = NULL;
 	while (line[i] == ' ')
 		i++;
-	get_pos_light(&line[i], &temp);
+	get_pos_light(&line[i], temp);
 	while (line[i] != ' ')
 		i++;
 	while (line[i] == ' ')
@@ -76,6 +76,6 @@ void        push_param_light(char *line, t_object *obj)
 		error("the light brightness ratio in range [0.0,1.0]");
 	while (line[i] != ' ')
 		i++;
-	get_color_light(&line[i], &temp);
+	get_color_light(&line[i], temp);
 	light_lstadd_back(&obj->lght, temp);
 }
