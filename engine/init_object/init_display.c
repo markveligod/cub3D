@@ -10,8 +10,16 @@ void    push_param_display(char *line, t_object *obj)
 	while (line[i] == ' ')
 		i++;
 	obj->dis->x = ft_atoi(&line[i]);
+	if (obj->dis->x > 1920)
+		obj->dis->x = 1920;
+	if (obj->dis->x <= 0)
+		error("Invalid Display parameter X");
 	while (line[i] != ' ')
 		i++;
 	obj->dis->y = ft_atoi(&line[i]);
+	if (obj->dis->y > 1080)
+		obj->dis->y = 1080;
+	if (obj->dis->y <= 0)
+		error("Invalid Display parameter Y");
 	obj->check->display++;
 }

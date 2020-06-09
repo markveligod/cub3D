@@ -1,14 +1,5 @@
 #include "../../minirt.h"
 
-t_camera	*camera_lstlast(t_camera *lst)
-{
-	if (!lst)
-		return (0);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
 void		camera_lstadd_back(t_camera **alst, t_camera *new)
 {
 	t_camera *lst;
@@ -19,12 +10,14 @@ void		camera_lstadd_back(t_camera **alst, t_camera *new)
 		*alst = new;
 	else
 	{
-		lst = camera_lstlast(*alst);
+		lst = *alst;
+		while (lst->next)
+			lst = lst->next;
 		lst->next = new;
 	}
 }
 
-void			get_pos_camera(char *line, t_camera *temp)
+void		get_pos_camera(char *line, t_camera *temp)
 {
 	int i;
 
@@ -39,21 +32,27 @@ void			get_pos_camera(char *line, t_camera *temp)
 	temp->pos[2] = ft_atof(&line[i]);
 }
 
-void			get_normal_camera(char *line, t_camera *temp)
+void		get_normal_camera(char *line, t_camera *temp)
 {
 	int i;
 
 	i = 0;
 	temp->normal[0] = ft_atof(line[i]);
+	if (temp->normal[0] < -1.0 || temp->normal[0] > 1.0)
+		error("3d normalized orientation vector. In range [-1,1] (*_*)");
 	while (line[i] != ',')
 		i++;
 	temp->normal[1] = ft_atof(&line[i]);
+	if (temp->normal[1] < -1.0 || temp->normal[1] > 1.0)
+		error("3d normalized orientation vector. In range [-1,1] (*_*)");
 	while (line[i] != ',')
 		i++;
 	temp->normal[2] = ft_atof(&line[i]);
+	if (temp->normal[2] < -1.0 || temp->normal[2] > 1.0)
+		error("3d normalized orientation vector. In range [-1,1] (*_*)");
 }
 
-t_camera		push_param_camera(char *line, t_object *obj)
+void		push_param_camera(char *line, t_object *obj)
 {
 	int i;
 	t_camera *temp;
@@ -64,7 +63,7 @@ t_camera		push_param_camera(char *line, t_object *obj)
 		temp = temp->next;
 	if (!(temp = (t_camera *)malloc(sizeof(t_camera))))
 		error("Memory could not be allocated in the Camera parameter");
-	obj->cam->next = NULL;
+	temp->next = NULL;
 	while (line[i] == ' ')
 		i++;
 	get_pos_camera(&line[i], &temp);
@@ -76,4 +75,7 @@ t_camera		push_param_camera(char *line, t_object *obj)
 	while (line[i] != ' ')
 		i++;
 	temp->fov = ft_atoi(&line[i]);
+	if (temp->fov < 0 || temp->fov > 180)
+		error("FOV : Horizontal field of view in degrees in range [0,180]");
+	camera_lstadd_back(&obj->cam, temp);
 }
