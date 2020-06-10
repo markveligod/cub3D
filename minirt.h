@@ -32,7 +32,7 @@ typedef struct			s_display
 typedef struct			s_ambient
 {
 	double				coef;
-	int					rgb[3];
+	int					*rgb;
 }						t_ambient;
 
 typedef struct			s_camera

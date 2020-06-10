@@ -7,6 +7,8 @@ void	push_param_ambient(char *line, t_object *obj)
 	i = 0;
 	if (!(obj->amb = (t_ambient *)malloc(sizeof(t_ambient))))
 		error("Memory could not be allocated in the Ambient parameter");
+	if (!(obj->amb->rgb = (int *)malloc(sizeof(int) * 3)))
+			error("Memory could not be allocated in the Ambient rgb parameter");
 	while (line[i] == ' ')
 		i++;
 	obj->amb->coef = ft_atof(&line[i]);
@@ -15,7 +17,7 @@ void	push_param_ambient(char *line, t_object *obj)
 	while (line[i] != ' ')
 		i++;
 	obj->amb->rgb[0] = ft_atoi(&line[i]);
-		printf("%s\n", line);
+	printf("%s\n", line);
 	if (obj->amb->rgb[0] > 255 || obj->amb->rgb[0] < 0)
 		error("Red colors in range [0-255]");
 	while (line[i] != ',')
