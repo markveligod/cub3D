@@ -16,7 +16,7 @@ void		main(int ac, char **av)
 			fd = open(av[1], O_RDONLY);
 			init_check_param_obj(&obj);
 			push_param_obj(fd, &obj);
-			printf ("Display - %d\n", obj.check->display);
+			printf ("Display - x: %d y: %d\n", obj.dis->x, obj.dis->y);
 		}
 		else
 			error("Unknown format of the scene (*_*)");

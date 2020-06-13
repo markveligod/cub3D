@@ -73,7 +73,6 @@ void	push_param_obj(int fd, t_object *obj)
 	{
 		if ((count = get_next_line(fd, &line)) == (-1))
 			error("I can't read the file (-_-) ");
-		printf("%d - %s\n", line[0], line);
 		sort_param_obj(line, obj);
 	}
 	check_param_obj(obj);
