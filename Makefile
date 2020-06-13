@@ -6,7 +6,7 @@ SRC_UTILS = ./utils/ft_atof.c ./utils/ft_atoi.c ./utils/ft_putstr_fd.c ./utils/f
 ./utils/ft_bzero.c
 SRC_ENGINE = ./engine/error.c ./engine/get_param_obj.c ./engine/init_object/init_ambient.c ./engine/init_object/init_camera.c ./engine/init_object/init_cylinder.c \
 ./engine/init_object/init_display.c ./engine/init_object/init_light.c ./engine/init_object/init_plane.c ./engine/init_object/init_sphere.c ./engine/init_object/init_square.c \
-./engine/init_object/init_triangle.c
+./engine/init_object/init_triangle.c ./engine/get_utils.c ./engine/check_utils.c
 SRC = ./minirt.c
 OBJ = $(SRC_UTILS:.c=.o) $(SRC_ENGINE:.c=.o) $(SRC:.c=.o)
 

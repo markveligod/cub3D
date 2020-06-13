@@ -32,64 +32,106 @@ typedef struct			s_display
 typedef struct			s_ambient
 {
 	double				coef;
-	int					*rgb;
+	short int			red;
+	short int			green;
+	short int			blue;
 }						t_ambient;
 
 typedef struct			s_camera
 {
-	double				pos[3];
-	double				normal[3];
+	double				pos_x;
+	double				pos_y;
+	double				pos_z;
+	double				normal_x;
+	double				normal_y;
+	double				normal_z;
 	int					fov;
 	struct s_camera		*next;
 }						t_camera;
 
 typedef struct			s_light
 {
-	double				pos[3];
+	double				pos_x;
+	double				pos_y;
+	double				pos_z;
 	double				brightness;
-	int					rgb[3];
+	short int			red;
+	short int			green;
+	short int			blue;
 	struct s_light		*next;
 }						t_light;
 
 typedef struct			s_sphere
 {
-	double				pos[3];
+	double				pos_x;
+	double				pos_y;
+	double				pos_z;
 	double				diameter;
-	int					rgb[3];
+	short int			red;
+	short int			green;
+	short int			blue;
 	struct s_sphere		*next;
 }						t_sphere;
 
 typedef struct			s_plane
 {
-	double				pos[3];
-	double				normal[3];
-	int					rgb[3];
+	double				pos_x;
+	double				pos_y;
+	double				pos_z;
+	double				normal_x;
+	double				normal_y;
+	double				normal_z;
+	short int			red;
+	short int			green;
+	short int			blue;
 	struct s_plane		*next;
 }						t_plane;
 
 typedef struct			s_square
 {
-	double				pos[3];
-	double				normal[3];
+	double				pos_x;
+	double				pos_y;
+	double				pos_z;
+	double				normal_x;
+	double				normal_y;
+	double				normal_z;
 	double				size;
-	int					rgb[3];
+	short int			red;
+	short int			green;
+	short int			blue;
 	struct s_square		*next;
 }						t_square;
 
 typedef struct			s_cylinder
 {
-	double				pos[3];
-	double				normal[3];
+	double				pos_x;
+	double				pos_y;
+	double				pos_z;
+	double				normal_x;
+	double				normal_y;
+	double				normal_z;
 	double				diameter;
 	double				height;
-	int					rgb[3];
+	short int			red;
+	short int			green;
+	short int			blue;
 	struct s_cylinder	*next;
 }						t_cylinder;
 
 typedef struct			s_triangle
 {
-	double				pos[9];
-	int					rgb[3];
+	double				pos_x_dot1;
+	double				pos_y_dot1;
+	double				pos_z_dot1;
+	double				pos_x_dot2;
+	double				pos_y_dot2;
+	double				pos_z_dot2;
+	double				pos_x_dot3;
+	double				pos_y_dot3;
+	double				pos_z_dot3;
+	short int			red;
+	short int			green;
+	short int			blue;
 	struct s_triangle	*next;
 }						t_triangle;
 
@@ -133,5 +175,11 @@ void					push_param_plane(char *line, t_object *obj);
 void					push_param_sphere(char *line, t_object *obj);
 void					push_param_square(char *line, t_object *obj);
 void					push_param_triangle(char *line, t_object *obj);
+void					check_fail_rgb(short int check, char *str);
+int						check_next_param(char ch, char *line, int flag);
+void					check_normal(double check, char *str);
+void					get_pos(char *line, double *pos_x, double *pos_y, double *pos_z);
+void					get_normal(char *line, double *normal_x, double *normal_y, double *normal_z, char *name);
+void					get_rgb(char *line, short int *red, short int *green, short int *blue, char *name);
 
 #endif
