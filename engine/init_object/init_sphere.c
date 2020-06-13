@@ -23,9 +23,6 @@ void		push_param_sphere(char *line, t_object *obj)
 	t_sphere *temp;
 
 	i = 0;
-	temp = obj->sp;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_sphere *)malloc(sizeof(t_sphere))))
 		error("Memory could not be allocated in the Sphere parameter");
 	temp->next = NULL;

@@ -23,9 +23,6 @@ void		push_param_cylinder(char *line, t_object *obj)
 	t_cylinder *temp;
 
 	i = 0;
-	temp = obj->cy;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_cylinder *)malloc(sizeof(t_cylinder))))
 		error("Memory could not be allocated in the Cylinder parameter");
 	temp->next = NULL;

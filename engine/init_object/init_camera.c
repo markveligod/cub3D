@@ -23,9 +23,6 @@ void		push_param_camera(char *line, t_object *obj)
 	t_camera *temp;
 
 	i = 0;
-	temp = obj->cam;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_camera *)malloc(sizeof(t_camera))))
 		error("Memory could not be allocated in the Camera parameter");
 	temp->next = NULL;

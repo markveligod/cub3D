@@ -23,9 +23,6 @@ void		push_param_plane(char *line, t_object *obj)
 	t_plane	*temp;
 
 	i = 0;
-	temp = obj->pl;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_plane *)malloc(sizeof(t_plane))))
 		error("Memory could not be allocated in the Plane parameter");
 	temp->next = NULL;

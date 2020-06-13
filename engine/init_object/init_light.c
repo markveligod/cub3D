@@ -23,9 +23,6 @@ void		push_param_light(char *line, t_object *obj)
 	t_light *temp;
 
 	i = 0;
-	temp = obj->lght;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_light *)malloc(sizeof(t_light))))
 		error("Memory could not be allocated in the Light parameter");
 	temp->next = NULL;

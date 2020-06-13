@@ -31,6 +31,8 @@ fclean: clean
 re: fclean all
 
 start: all
+	@/bin/rm -f log.txt
+	@echo "\033[90m[\033[91mWarning\033[90m]\033[31m log.txt deleted\033[0m"
 	./run_minirt scene.rt
 
 .PHONY: all clean fclean re bonus

@@ -23,9 +23,6 @@ void		push_param_triangle(char *line, t_object *obj)
 	t_triangle *temp;
 
 	i = 0;
-	temp = obj->tr;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_triangle *)malloc(sizeof(t_triangle))))
 		error("Memory could not be allocated in the Cylinder parameter");
 	temp->next = NULL;

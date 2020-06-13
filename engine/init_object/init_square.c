@@ -23,9 +23,6 @@ void		push_param_square(char *line, t_object *obj)
 	t_square *temp;
 
 	i = 0;
-	temp = obj->sq;
-	while (temp)
-		temp = temp->next;
 	if (!(temp = (t_square *)malloc(sizeof(t_square))))
 		error("Memory could not be allocated in the Square parameter");
 	temp->next = NULL;
