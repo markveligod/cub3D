@@ -8,14 +8,15 @@ SRC_ENGINE = ./engine/error.c ./engine/get_param_obj.c ./engine/init_object/init
 ./engine/init_object/init_display.c ./engine/init_object/init_light.c ./engine/init_object/init_plane.c ./engine/init_object/init_sphere.c ./engine/init_object/init_square.c \
 ./engine/init_object/init_triangle.c ./engine/get_utils.c ./engine/check_utils.c
 SRC = ./minirt.c
-OBJ = $(SRC_UTILS:.c=.o) $(SRC_ENGINE:.c=.o) $(SRC:.c=.o)
+SRC_MATH = ./engine/math/ray_tracing.c
+OBJ = $(SRC_MATH:.c=.o) $(SRC_UTILS:.c=.o) $(SRC_ENGINE:.c=.o) $(SRC:.c=.o)
 
 %.o:%.c
 	@$(CC) -o $@ -c $<
 	@echo "\033[90m[\033[32mOK\033[90m]\033[33m Compiling $<\033[0m"
 
 $(NAME): $(OBJ) $(HDRS)
-	@$(CC) -o $(NAME) $(OBJ)
+	@$(CC) -o $(NAME) $(OBJ) $(FLAGS)
 	@echo "\033[90m[\033[32mSuccess\033[90m]\033[32m Successfully compiled miniRT project.\033[0m"
 
 all: $(NAME)

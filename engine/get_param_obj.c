@@ -15,6 +15,12 @@ void	init_check_param_obj(t_object *obj)
 	obj->check->triangle = 0;
 }
 
+void	init_mlx_param_obj(t_object *obj)
+{
+	if (!(obj->rt = malloc(sizeof(t_mlxrt))))
+		error("Memory could not be allocated in the MLX_RT parameter");
+}
+
 void	check_param_obj(t_object *obj)
 {
 	if (obj->check->display != 1)

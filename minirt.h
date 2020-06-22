@@ -1,32 +1,34 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 # define BUFFER_SIZE 32
+# define KEY_ESC 53
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <mlx.h>
 
 #include <stdio.h>
 
 typedef struct			s_check
 {
-	int					display;
-	int					ambient;
-	int					camera;
-	int					light;
-	int					sphere;
-	int					plane;
-	int					square;
-	int					cylinder;
-	int					triangle;
+	short int			display;
+	short int			ambient;
+	short int			camera;
+	short int			light;
+	short int			sphere;
+	short int			plane;
+	short int			square;
+	short int			cylinder;
+	short int			triangle;
 }						t_check;
 
 
 typedef struct			s_display
 {
-	int					x;
-	int					y;
+	short int			x;
+	short int			y;
 }						t_display;
 
 typedef struct			s_ambient
@@ -45,7 +47,7 @@ typedef struct			s_camera
 	double				normal_x;
 	double				normal_y;
 	double				normal_z;
-	int					fov;
+	short int			fov;
 	struct s_camera		*next;
 }						t_camera;
 
@@ -135,6 +137,12 @@ typedef struct			s_triangle
 	struct s_triangle	*next;
 }						t_triangle;
 
+typedef struct			s_mlxrt
+{
+	void				*mlx_ptr;
+	void				*win_ptr;
+}						t_mlxrt;
+
 typedef struct			s_object
 {
 	t_check				*check;
@@ -147,6 +155,7 @@ typedef struct			s_object
 	t_square			*sq;
 	t_cylinder			*cy;
 	t_triangle			*tr;
+	t_mlxrt				*rt;
 }						t_object;
 
 /*
@@ -181,5 +190,8 @@ void					check_normal(double check, char *str);
 void					get_pos(char *line, double *pos_x, double *pos_y, double *pos_z);
 void					get_normal(char *line, double *normal_x, double *normal_y, double *normal_z, char *name);
 void					get_rgb(char *line, short int *red, short int *green, short int *blue, char *name);
+void					init_mlx_param_obj(t_object *obj);
+void					start_rt(t_object *obj);
+int						close_win();
 
 #endif
