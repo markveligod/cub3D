@@ -2,6 +2,7 @@
 # define MINIRT_H
 # define BUFFER_SIZE 32
 # define KEY_ESC 53
+# define BACKGROUND 0x00FFFFFF
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -34,9 +35,7 @@ typedef struct			s_display
 typedef struct			s_ambient
 {
 	double				coef;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 }						t_ambient;
 
 typedef struct			s_camera
@@ -57,9 +56,7 @@ typedef struct			s_light
 	double				pos_y;
 	double				pos_z;
 	double				brightness;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 	struct s_light		*next;
 }						t_light;
 
@@ -69,9 +66,7 @@ typedef struct			s_sphere
 	double				pos_y;
 	double				pos_z;
 	double				diameter;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 	struct s_sphere		*next;
 }						t_sphere;
 
@@ -83,9 +78,7 @@ typedef struct			s_plane
 	double				normal_x;
 	double				normal_y;
 	double				normal_z;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 	struct s_plane		*next;
 }						t_plane;
 
@@ -98,9 +91,7 @@ typedef struct			s_square
 	double				normal_y;
 	double				normal_z;
 	double				size;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 	struct s_square		*next;
 }						t_square;
 
@@ -114,9 +105,7 @@ typedef struct			s_cylinder
 	double				normal_z;
 	double				diameter;
 	double				height;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 	struct s_cylinder	*next;
 }						t_cylinder;
 
@@ -131,9 +120,7 @@ typedef struct			s_triangle
 	double				pos_x_dot3;
 	double				pos_y_dot3;
 	double				pos_z_dot3;
-	short int			red;
-	short int			green;
-	short int			blue;
+	int					rgb;
 	struct s_triangle	*next;
 }						t_triangle;
 
@@ -141,7 +128,20 @@ typedef struct			s_mlxrt
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
+	void				*img_ptr;
+	char				*img_data;
+	int					bpp;
+	int					line_length;
+	int					endian;
+
 }						t_mlxrt;
+
+typedef struct			s_viewport
+{
+	int					v_x;
+	int					v_y;
+	int					v_z;
+}						t_viewport;
 
 typedef struct			s_object
 {
@@ -156,6 +156,7 @@ typedef struct			s_object
 	t_cylinder			*cy;
 	t_triangle			*tr;
 	t_mlxrt				*rt;
+	t_viewport			*view;
 }						t_object;
 
 /*
@@ -189,9 +190,14 @@ int						check_next_param(char ch, char *line, int flag);
 void					check_normal(double check, char *str);
 void					get_pos(char *line, double *pos_x, double *pos_y, double *pos_z);
 void					get_normal(char *line, double *normal_x, double *normal_y, double *normal_z, char *name);
-void					get_rgb(char *line, short int *red, short int *green, short int *blue, char *name);
+void					get_rgb(char *line, int *rgb, char *name);
 void					init_mlx_param_obj(t_object *obj);
 void					start_rt(t_object *obj);
 int						close_win();
+
+/*
+ * Raytracing prototype 
+*/
+int						rt_sphere(t_object *obj, int t_min);
 
 #endif

@@ -37,7 +37,7 @@ void		push_param_square(char *line, t_object *obj)
 	if (temp->size < 0.0)
 		error("The size cannot be negative");
 	i += check_next_param(' ', &line[i], 0);
-	get_rgb(&line[i], &(temp->red), &(temp->green), &(temp->blue), "Square");
+	get_rgb(&line[i], &(temp->rgb), "Square");
 	square_lstadd_back(&obj->sq, temp);
 	obj->check->square++;
 }

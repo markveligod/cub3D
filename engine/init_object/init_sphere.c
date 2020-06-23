@@ -34,7 +34,7 @@ void		push_param_sphere(char *line, t_object *obj)
 	if (temp->diameter < 0.0)
 		error("The diameter cannot be negative");
 	i += check_next_param(' ', &line[i], 0);
-	get_rgb(&line[i], &(temp->red), &(temp->green), &(temp->blue), "Sphere");
+	get_rgb(&line[i], &(temp->rgb), "Sphere");
 	sphere_lstadd_back(&obj->sp, temp);
 	obj->check->sphere++;
 }

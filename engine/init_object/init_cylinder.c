@@ -42,7 +42,7 @@ void		push_param_cylinder(char *line, t_object *obj)
 	if (temp->height < 0.0)
 		error("The height cannot be negative");
 	i += check_next_param(' ', &line[i], 0);
-	get_rgb(&line[i], &(temp->red), &(temp->green), &(temp->blue), "Cylinder");
+	get_rgb(&line[i], &(temp->rgb), "Cylinder");
 	cylinder_lstadd_back(&obj->cy, temp);
 	obj->check->cylinder++;
 }

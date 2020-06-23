@@ -34,7 +34,7 @@ void		push_param_light(char *line, t_object *obj)
 	if (temp->brightness < 0.0 || temp->brightness > 1.0)
 		error("the light brightness ratio in range [0.0,1.0]");
 	i += check_next_param(' ', &line[i], 0);
-	get_rgb(&line[i], &(temp->red), &(temp->green), &(temp->blue), "Light");
+	get_rgb(&line[i], &(temp->rgb), "Light");
 	light_lstadd_back(&obj->lght, temp);
 	obj->check->light++;
 }

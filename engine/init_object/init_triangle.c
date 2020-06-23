@@ -35,7 +35,7 @@ void		push_param_triangle(char *line, t_object *obj)
 	i += check_next_param(' ', &line[i], 1);
 	get_pos(&line[i], &(temp->pos_z_dot1), &(temp->pos_z_dot2), &(temp->pos_z_dot3));
 	i += check_next_param(' ', &line[i], 0);
-	get_rgb(&line[i], &(temp->red), &(temp->green), &(temp->blue), "Triangle");
+	get_rgb(&line[i], &(temp->rgb), "Triangle");
 	triangle_lstadd_back(&obj->tr, temp);
 	obj->check->triangle++;
 }

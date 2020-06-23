@@ -19,6 +19,8 @@ void	init_mlx_param_obj(t_object *obj)
 {
 	if (!(obj->rt = malloc(sizeof(t_mlxrt))))
 		error("Memory could not be allocated in the MLX_RT parameter");
+	if (!(obj->view = malloc(sizeof(t_viewport))))
+		error("Memory could not be allocated in the MLX_RT parameter");
 }
 
 void	check_param_obj(t_object *obj)

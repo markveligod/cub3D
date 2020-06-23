@@ -32,7 +32,7 @@ void		push_param_plane(char *line, t_object *obj)
 	i += check_next_param(' ', &line[i], 1);
 	get_normal(&line[i], &(temp->normal_x), &(temp->normal_y), &(temp->normal_z), "Plane");
 	i += check_next_param(' ', &line[i], 0);
-	get_rgb(&line[i], &(temp->red), &(temp->green), &(temp->blue), "Plane");
+	get_rgb(&line[i], &(temp->rgb), "Plane");
 	plane_lstadd_back(&obj->pl, temp);
 	obj->check->plane++;
 }

@@ -8,7 +8,7 @@ SRC_ENGINE = ./engine/error.c ./engine/get_param_obj.c ./engine/init_object/init
 ./engine/init_object/init_display.c ./engine/init_object/init_light.c ./engine/init_object/init_plane.c ./engine/init_object/init_sphere.c ./engine/init_object/init_square.c \
 ./engine/init_object/init_triangle.c ./engine/get_utils.c ./engine/check_utils.c
 SRC = ./minirt.c
-SRC_MATH = ./engine/math/ray_tracing.c
+SRC_MATH = ./engine/math/ray_tracing.c ./engine/math/rt_object/rt_sphere.c
 OBJ = $(SRC_MATH:.c=.o) $(SRC_UTILS:.c=.o) $(SRC_ENGINE:.c=.o) $(SRC:.c=.o)
 
 %.o:%.c

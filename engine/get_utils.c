@@ -30,17 +30,23 @@ void		get_normal(char *line, double *normal_x, double *normal_y, double *normal_
 	check_normal(*normal_z, name);
 }
 
-void		get_rgb(char *line, short int *red, short int *green, short int *blue, char *name)
+void		get_rgb(char *line, int *rgb, char *name)
 {
     int i;
+	int red;
+	int green;
+	int blue;
 
     i = 0;
-	*red = (short int)ft_atoi(&line[i]);
-	check_fail_rgb(*red, ft_strjoin(name, " Red"));
+	red = (short int)ft_atoi(&line[i]);
+	check_fail_rgb(red, ft_strjoin(name, " Red"));
+	*rgb = red;
 	i += (check_next_param(',', &line[i], 0) + 1);
-	*green = (short int)ft_atoi(&line[i]);
-	check_fail_rgb(*green, ft_strjoin(name, " Green"));
+	green = (short int)ft_atoi(&line[i]);
+	check_fail_rgb(green, ft_strjoin(name, " Green"));
+	*rgb = (*rgb << 8) + green;
 	i += (check_next_param(',', &line[i], 0) + 1);
-	*blue = (short int)ft_atoi(&line[i]);
-	check_fail_rgb(*blue, ft_strjoin(name, " Blue"));
+	blue = (short int)ft_atoi(&line[i]);
+	check_fail_rgb(blue, ft_strjoin(name, " Blue"));
+	*rgb = (*rgb << 8) + blue;
 }
