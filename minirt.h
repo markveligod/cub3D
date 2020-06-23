@@ -141,6 +141,11 @@ typedef struct			s_viewport
 	int					v_x;
 	int					v_y;
 	int					v_z;
+	int					vector_oc_x;
+	int					vector_oc_y;
+	int					vector_oc_z;
+	int					t_1;
+	int					t_2;
 }						t_viewport;
 
 typedef struct			s_object
