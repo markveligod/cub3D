@@ -15,6 +15,13 @@ void	get_param_objects(int fd, t_ptr *ptr)
 			error("File doesn't read (*_8)");
 		while (line[i] == ' ' || line[i] == '\t')
 			i++;
+		if (line[i] == '1' || line[i] == '0' || line[i] == '2')
+		{
+			ptr->check->check_map++;
+			get_param_map(fd, line, ptr);
+			break ;
+		}
 		sort_param_object(&line[i], ptr);
 	}
+	check_param_objects(ptr);
 }

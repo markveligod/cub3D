@@ -32,7 +32,8 @@ typedef struct	s_param
 	char		*sprite;
 	int			f_rgb;
 	int			c_rgb;
-	char		**map;
+	char		*line_map;
+	char		**split_map;
 }				t_param;
 
 typedef struct	s_ptr
