@@ -18,6 +18,7 @@ typedef struct	s_check
 	short int	check_f;
 	short int	check_c;
 	short int	check_map;
+	short int	check_pos_player;
 }				t_check;
 
 typedef struct	s_param
@@ -32,6 +33,7 @@ typedef struct	s_param
 	char		*sprite;
 	int			f_rgb;
 	int			c_rgb;
+	char		dir_player;
 	char		*line_map;
 	char		**split_map;
 }				t_param;
@@ -62,6 +64,7 @@ int				get_next_line(int fd, char **line);
 */
 int				check_filename(char *filename);
 void			init_check_struct(t_ptr *ptr);
+void			check_line_map(char *line, t_ptr *ptr);
 
 /*
  * Prototype get pararm obj

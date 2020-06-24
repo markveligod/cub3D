@@ -13,4 +13,5 @@ void	init_check_struct(t_ptr *ptr)
 	ptr->check->check_f = 0;
 	ptr->check->check_c = 0;
 	ptr->check->check_map = 0;
+	ptr->check->check_pos_player = 0;
 }

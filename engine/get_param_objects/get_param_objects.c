@@ -11,7 +11,7 @@ void	get_param_objects(int fd, t_ptr *ptr)
 	init_param_objects(ptr);
 	while (count > 0)
 	{
-		if ((count = get_next_line(fd, &line)) == -1)
+		if ((count = get_next_line(fd, &line)) == (-1))
 			error("File doesn't read (*_8)");
 		while (line[i] == ' ' || line[i] == '\t')
 			i++;
@@ -21,7 +21,7 @@ void	get_param_objects(int fd, t_ptr *ptr)
 			get_param_map(fd, line, ptr);
 			break ;
 		}
-		sort_param_object(&line[i], ptr);
+		sort_param_objects(&line[i], ptr);
 	}
 	check_param_objects(ptr);
 }
