@@ -1,6 +1,6 @@
 #include "../cub.h"
 
-void    error(char *str)
+void	error(char *str)
 {
 	int fd;
 

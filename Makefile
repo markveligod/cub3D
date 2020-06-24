@@ -3,7 +3,7 @@ FLAGS = -Wall -Werror -Wextra -fsanitize=address -lmlx -framework OpenGL -framew
 HDRS = ./cub.h
 SRC = ./cub.h ./engine/error.c
 SRC_UTILS = ./utils/ft_atoi.c ./utils/ft_putstr_fd.c ./utils/ft_strjoin.c ./utils/ft_strlen.c ./utils/get_next_line.c ./utils/ft_bzero.c
-SRC_CHECK = ./engine/check/check_filename.c
+SRC_CHECK = ./engine/check/check_filename.c ./engine/check/init_check_struct.c
 OBJ = $(SRC:.c=.o) $(SRC_UTILS:.c=.o) $(SRC_CHECK:.c=.o)
 
 %.o:%.c
