@@ -41,16 +41,50 @@ typedef struct	s_paramobj
 	char		**split_map;
 }				t_paramobj;
 
+typedef struct	s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+}				t_player;
+
+typedef struct	s_mlxparam
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+}				t_mlxparam;
+
+typedef struct	s_dda
+{
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	int			map_x;
+	int			map_y;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	
+}				t_dda;
+
 typedef struct	s_ptr
 {
 	t_check		*check;
 	t_paramobj	*param;
+	t_player	*player;
+	t_mlxparam	*mlx;
 }				t_ptr;
 
 /*
  * Prototype error
 */
 void			error(char *str);
+int				close_win(void);
 
 /*
  * Prototype utils
@@ -65,7 +99,7 @@ char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 
 /*
- * Prototype check
+ * Prototype check 
 */
 int				check_filename(char *filename);
 void			init_check_struct(t_ptr *ptr);
@@ -73,13 +107,22 @@ void			check_line_map(char *line, t_ptr *ptr);
 void			check_param_objects(t_ptr *ptr);
 
 /*
- * Prototype get pararm obj
+ * Prototype get param obj
 */
 void			init_param_objects(t_ptr *ptr);
 void			get_param_objects(int fd, t_ptr *ptr);
 void			sort_param_objects(char *line, t_ptr *ptr);
 void			get_param_map(int fd, char *line, t_ptr *ptr);
 
+/*
+ * Prototype dda param
+*/
 
+/*
+ * Prototype game param
+*/
+void			start_game(t_ptr *ptr);
+void			init_game_struct(t_ptr *ptr);
+void			init_game_param(t_ptr *ptr);
 
 #endif

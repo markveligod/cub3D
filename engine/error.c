@@ -10,3 +10,9 @@ void	error(char *str)
 	ft_putstr_fd("CHECK LOG.TXT (-_-)", 1);
 	exit(EXIT_FAILURE);
 }
+
+int		close_win(void)
+{
+	exit(EXIT_SUCCESS);
+	return (0);
+}
