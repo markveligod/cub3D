@@ -1,4 +1,4 @@
-#include "../minirt.h"
+#include "../cub.h"
 
 int		check_line_break(char *str)
 {
