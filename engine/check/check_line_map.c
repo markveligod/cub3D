@@ -15,7 +15,7 @@ void		check_line_map(char *line, t_ptr *ptr)
 		line[i] == 'W')
 		{
 			ptr->param->dir_player = line[i];
-			ptr->check->check_pos_player++;
+			ptr->check->pos_player++;
 		}
 		i++;
 	}

@@ -15,4 +15,5 @@ void		get_param_map(int fd, char *line, t_ptr *ptr)
 		ptr->param->line_map = ft_strjoin(ptr->param->line_map, line);
 		ptr->param->line_map = ft_strjoin(ptr->param->line_map, "$");
 	}
+	ptr->param->split_map = ft_split(ptr->param->line_map, '$');
 }

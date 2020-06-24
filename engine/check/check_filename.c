@@ -1,4 +1,4 @@
-#include "cub.h"
+#include "../../cub.h"
 
 int		check_filename(char *filename)
 {
