@@ -41,8 +41,8 @@ void			init_game_param(t_ptr *ptr)
 		while (ptr->param->split_map[i][++j])
 			if (is_player(ptr->param->split_map[i][j]))
 			{
-				ptr->player->pos_x = (double)j;
-				ptr->player->pos_y = (double)i;
+				ptr->player->pos_x = (double)i;
+				ptr->player->pos_y = (double)j;
 				break ;
 			}
 	}

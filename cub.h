@@ -55,12 +55,12 @@ typedef struct	s_mlxparam
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	void		*img_ptr;
 }				t_mlxparam;
 
 typedef struct	s_dda
 {
 	double		camera_x;
+	int			screenx;
 	double		raydir_x;
 	double		raydir_y;
 	int			map_x;
@@ -69,7 +69,14 @@ typedef struct	s_dda
 	double		sidedist_y;
 	double		deltadist_x;
 	double		deltadist_y;
-	
+	double		walldist;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			side;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
 }				t_dda;
 
 typedef struct	s_match
@@ -84,6 +91,17 @@ typedef struct	s_match
 	short int	line_down_4;
 }				t_match;
 
+typedef struct	s_image
+{
+	void		*img_ptr;
+	char		*img_data;
+	int			width;
+	int			height;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_image;
+
 typedef struct	s_ptr
 {
 	t_check		*check;
@@ -91,6 +109,8 @@ typedef struct	s_ptr
 	t_player	*player;
 	t_mlxparam	*mlx;
 	t_match		*match;
+	t_image		**img;
+	t_dda		*dda;
 }				t_ptr;
 
 /*
@@ -131,6 +151,9 @@ void			get_param_map(int fd, char *line, t_ptr *ptr);
 /*
  * Prototype dda param
 */
+void			init_dda_struct(t_ptr *ptr);
+void			run_dda(t_ptr *ptr);
+void			run_draw(t_ptr *ptr);
 
 /*
  * Prototype game param
@@ -138,5 +161,6 @@ void			get_param_map(int fd, char *line, t_ptr *ptr);
 void			start_game(t_ptr *ptr);
 void			init_game_struct(t_ptr *ptr);
 void			init_game_param(t_ptr *ptr);
+void			init_image_struct(t_ptr *ptr);
 
 #endif
