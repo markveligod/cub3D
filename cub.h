@@ -49,6 +49,8 @@ typedef struct	s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	double		movespeed;
+	double		rotspeed;
 }				t_player;
 
 typedef struct	s_mlxparam
@@ -162,5 +164,7 @@ void			start_game(t_ptr *ptr);
 void			init_game_struct(t_ptr *ptr);
 void			init_game_param(t_ptr *ptr);
 void			init_image_struct(t_ptr *ptr);
+void			forward_key(t_ptr *ptr);
+void			back_key(t_ptr *ptr);
 
 #endif

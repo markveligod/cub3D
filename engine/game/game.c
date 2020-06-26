@@ -1,9 +1,17 @@
 #include "../../cub.h"
 
-static int		control_keys(int key)
+static int		control_keys(int key, t_ptr *ptr)
 {
 	if (key == 53)
 		close_win();
+	else if (key == 13)
+		forward_key(ptr);
+	else if (key == 1)
+		back_key(ptr);
+/*	else if (key == 0)
+		left_key(ptr);
+	else if (key == 2)
+		right_key(ptr); */
 	return (0);
 }
 

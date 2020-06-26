@@ -77,7 +77,6 @@ void			run_draw(t_ptr *ptr)
 	ptr->dda->drawend = ptr->dda->lineheight/ 2 + ptr->param->y / 2;
 	if (ptr->dda->drawend > ptr->param->y)
 		ptr->dda->drawend = ptr->param->y - 1;
-	printf("%d , %d \n", ptr->dda->drawstart, ptr->dda->drawend);
 	y += draw_ceilling(ptr, y);
 	y += draw_texture(ptr, y);
 	draw_floor(ptr, y);
