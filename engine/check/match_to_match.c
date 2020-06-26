@@ -47,13 +47,25 @@ static void		push_next(char *line, t_ptr *ptr)
 		j--;
 	ptr->match->line_down_4 = j;
 	while (line[j] == '1')
-		j++;
+		j--;
 	ptr->match->line_down_3 = j + 1;
 }
 
 static void		check_match(t_ptr *ptr)
 {
-	if ((ptr->match->line_down_1 >= ptr->match->line_up_1 || ptr->match->line_down_1 <= ptr->match->line_up_1))
+	if ((ptr->match->line_down_1 < ptr->match->line_up_1 && ptr->match->line_down_2 < ptr->match->line_up_1) ||
+	(ptr->match->line_down_1 > ptr->match->line_up_2 && ptr->match->line_down_2 > ptr->match->line_up_2))
+		error("The left edge does not close the map. (@_@)");
+	if ((ptr->match->line_down_3 < ptr->match->line_up_3 && ptr->match->line_down_4 < ptr->match->line_up_3) ||
+	(ptr->match->line_down_3 > ptr->match->line_up_4 && ptr->match->line_down_4 > ptr->match->line_up_4))
+	{
+		printf("Up: %d %d %d %d\nDown: %d %d %d %d\n", ptr->match->line_up_1, ptr->match->line_up_2, ptr->match->line_up_3, ptr->match->line_up_4, ptr->match->line_down_1, ptr->match->line_down_2, ptr->match->line_down_3, ptr->match->line_down_4);
+		error("The right edge does not close the map. (@_@)");
+	}
+	ptr->match->line_up_1 = ptr->match->line_down_1;
+	ptr->match->line_up_2 = ptr->match->line_down_2;
+	ptr->match->line_up_3 = ptr->match->line_down_3;
+	ptr->match->line_up_4 = ptr->match->line_down_4;
 }
 
 void			match_to_match(char **arr, t_ptr *ptr)
@@ -65,6 +77,7 @@ void			match_to_match(char **arr, t_ptr *ptr)
 	init_match_struct(ptr);
 	while (arr[i])
 	{
+		printf("%s\n", arr[i]);
 		if (i == 0)
 		{
 			push_line_up_down(&(ptr->match->line_up_1), &(ptr->match->line_up_2), &(ptr->match->line_up_3),

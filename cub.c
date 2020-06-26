@@ -13,7 +13,7 @@ int		main(int ac, char **av)
 			init_check_struct(&ptr);
 			get_param_objects(fd ,&ptr);
 			match_to_match(ptr.param->split_map, &ptr);
-			//start_game(&ptr);
+			start_game(&ptr);
 			/*
 			//TEST check struct input
 			printf("r: %d\nno: %d\nso: %d\nwe: %d\nea: %d\ns: %d\nf: %d\nc: %d\nmap: %d\npos_player: %d\n", ptr.check->r, ptr.check->no, ptr.check->so, ptr.check->we, ptr.check->ea, ptr.check->s, ptr.check->f, ptr.check->c, ptr.check->map, ptr.check->pos_player);

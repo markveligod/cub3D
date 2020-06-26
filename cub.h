@@ -6,7 +6,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <errno.h>
-//# include <mlx.h>
+# include <mlx.h>
 # include <unistd.h>
 
 #include <stdio.h>
