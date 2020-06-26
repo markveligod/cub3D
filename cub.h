@@ -6,7 +6,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <errno.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include <unistd.h>
 
 #include <stdio.h>
@@ -72,12 +72,25 @@ typedef struct	s_dda
 	
 }				t_dda;
 
+typedef struct	s_match
+{
+	short int	line_up_1;
+	short int	line_up_2;
+	short int	line_up_3;
+	short int	line_up_4;
+	short int	line_down_1;
+	short int	line_down_2;
+	short int	line_down_3;
+	short int	line_down_4;
+}				t_match;
+
 typedef struct	s_ptr
 {
 	t_check		*check;
 	t_paramobj	*param;
 	t_player	*player;
 	t_mlxparam	*mlx;
+	t_match		*match;
 }				t_ptr;
 
 /*
@@ -105,6 +118,7 @@ int				check_filename(char *filename);
 void			init_check_struct(t_ptr *ptr);
 void			check_line_map(char *line, t_ptr *ptr);
 void			check_param_objects(t_ptr *ptr);
+void			match_to_match(char **arr, t_ptr *ptr);
 
 /*
  * Prototype get param obj

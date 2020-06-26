@@ -5,9 +5,9 @@ void	error(char *str)
 	int fd;
 
 	fd = open("log.txt", O_WRONLY);
-	str = ft_strjoin("ERROR: ", str);
+	str = ft_strjoin("Error\n", str);
 	ft_putstr_fd(str, fd);
-	ft_putstr_fd("CHECK LOG.TXT (-_-)", 1);
+	ft_putstr_fd("CHECK LOG.TXT (-_-)\n", 1);
 	exit(EXIT_FAILURE);
 }
 
