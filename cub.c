@@ -36,9 +36,9 @@ int		main(int ac, char **av)
 			*/
 		}
 		else
-			error("File name invalid (^_^)");
+			ft_putstr_fd("File name invalid (^_^)\n", 1);
 	}
 	else
-		error("Arg more two input or less two input (> <)");
+		ft_putstr_fd("Arg more two input or less two input (> <)\n", 1);
 	return (0);
 }

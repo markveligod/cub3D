@@ -164,7 +164,8 @@ void			start_game(t_ptr *ptr);
 void			init_game_struct(t_ptr *ptr);
 void			init_game_param(t_ptr *ptr);
 void			init_image_struct(t_ptr *ptr);
-void			forward_key(t_ptr *ptr);
-void			back_key(t_ptr *ptr);
+void			forward_back_keys(t_ptr *ptr, int key);
+void			rot_left_right_keys(t_ptr *ptr, int key);
+void			left_right_keys(t_ptr *ptr, int key);
 
 #endif

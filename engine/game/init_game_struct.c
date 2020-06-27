@@ -51,6 +51,7 @@ void			init_game_param(t_ptr *ptr)
 	ptr->player->plane_x = 0.0;
 	ptr->player->plane_y = 0.0;
 	ptr->player->movespeed = 0.2;
+	ptr->player->rotspeed = 0.1;
 	set_dir_plane(ptr, ptr->param->dir_player);
 }
 
