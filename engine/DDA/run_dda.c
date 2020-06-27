@@ -94,4 +94,5 @@ void			run_dda(t_ptr *ptr)
 		run_draw(ptr);
 		ptr->dda->screenx++;
 	}
+	//draw_sprite(ptr);
 }

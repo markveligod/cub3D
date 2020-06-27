@@ -3,9 +3,10 @@ NO ./texture/text.xpm
 SO ./texture/text.xpm
 WE ./texture/text.xpm
 EA ./texture/text.xpm
-S ./texture
-F 144,100,30
-C 80,30,225
+S ./texture/greenlight.xpm
+F 0,0,0
+C 0,0,0
+
 
         1111111111111111111111111
         1000000000110000000000001

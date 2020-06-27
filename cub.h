@@ -112,8 +112,31 @@ typedef struct	s_image
 typedef struct	s_sprite
 {
 	double		*buffer;
+	int			nb_sprite;
+	double		sprite_x;
+	double		sprite_y;
+	double		inv_det;
+	double		transform_x;
+	double		transform_y;
+	int			sprite_screenx;
+	int			sprite_height;
+	int			drawstart_y;
+	int			drawend_y;
+	int			sprite_width;
+	int			drawstart_x;
+	int			drawend_x;
+	int			stripe;
+	int			d;
+	int			tex_x;
+	int			tex_y;
 }				t_sprite;
 
+typedef struct	s_distz
+{
+	double		x;
+	double		y;
+	double		dist_z;
+}				t_distz;
 
 typedef struct	s_ptr
 {
@@ -125,6 +148,7 @@ typedef struct	s_ptr
 	t_image		**img;
 	t_dda		*dda;
 	t_sprite	*sp;
+	t_distz		**distz
 }				t_ptr;
 
 /*
