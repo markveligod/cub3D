@@ -104,6 +104,12 @@ typedef struct	s_image
 	int			endian;
 }				t_image;
 
+typedef struct	s_sprite
+{
+	double		*buffer;
+}				t_sprite;
+
+
 typedef struct	s_ptr
 {
 	t_check		*check;
@@ -113,6 +119,7 @@ typedef struct	s_ptr
 	t_match		*match;
 	t_image		**img;
 	t_dda		*dda;
+	t_sprite	*sp;
 }				t_ptr;
 
 /*
@@ -132,6 +139,7 @@ char			*ft_strjoin(char const *s1, char const *s2);
 int				get_next_line(int fd, char **line);
 char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
+char			*ft_strtrim(char const *s1, char const *set);
 
 /*
  * Prototype check 
@@ -163,9 +171,9 @@ void			run_draw(t_ptr *ptr);
 void			start_game(t_ptr *ptr);
 void			init_game_struct(t_ptr *ptr);
 void			init_game_param(t_ptr *ptr);
-void			init_image_struct(t_ptr *ptr);
 void			forward_back_keys(t_ptr *ptr, int key);
 void			rot_left_right_keys(t_ptr *ptr, int key);
 void			left_right_keys(t_ptr *ptr, int key);
+void			init_text_param(t_ptr *ptr);
 
 #endif

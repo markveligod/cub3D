@@ -22,28 +22,6 @@ static int		draw_ceilling(t_ptr *ptr, int y)
 	return (y);
 }
 
-static int		draw_texture(t_ptr *ptr, int y)
-{
-	int r;
-	int g;
-	int b;
-
-	r = 255;
-	g = 0;
-	b = 0;
-	while (y < ptr->dda->drawend)
-	{
-		ptr->img[0]->img_data
-		[ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] = r;
-		ptr->img[0]->img_data
-		[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] = g;
-		ptr->img[0]->img_data
-		[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] = b;
-		y++;
-	}
-	return (y);
-}
-
 static void		draw_floor(t_ptr *ptr, int y)
 {
 	int r;

@@ -1,5 +1,24 @@
 #include "../../cub.h"
 
+static void		is_side(t_ptr *ptr)
+{
+	ptr->dda->hit = 1;
+	if (!ptr->dda->side)
+	{
+		if (ptr->dda->raydir_x < 0)
+			ptr->dda->side = 1;
+		else if (ptr->dda->raydir_x > 0)
+			ptr->dda->side = 2;
+	}
+	else if (ptr->dda->side == 1)
+	{
+		if (ptr->dda->raydir_y < 0)
+			ptr->dda->side = 3;
+		else if (ptr->dda->raydir_y > 0)
+			ptr->dda->side = 4;
+	}
+}
+
 static void		check_dist(t_ptr *ptr)
 {
 	ptr->dda->hit = 0;
@@ -19,12 +38,14 @@ static void		check_dist(t_ptr *ptr)
 			ptr->dda->side = 1;
 		}
 		if (ptr->param->split_map[ptr->dda->map_x][ptr->dda->map_y] == '1')
-			ptr->dda->hit = 1;
+			is_side(ptr);
 	}
-	if (ptr->dda->side == 0)
-		ptr->dda->walldist = (ptr->dda->map_x - ptr->player->pos_x + (1 - ptr->dda->stepx) / 2) / ptr->dda->raydir_x;
-	else
-		ptr->dda->walldist = (ptr->dda->map_y - ptr->player->pos_y + (1 - ptr->dda->stepy) / 2) / ptr->dda->raydir_y;
+	if (ptr->dda->side == 1 || ptr->dda->side == 2)
+		ptr->dda->walldist = (ptr->dda->map_x - ptr->player->pos_x +
+			(1 - ptr->dda->stepx) / 2) / ptr->dda->raydir_x;
+	else if (ptr->dda->side == 3 || ptr->dda->side == 4)
+		ptr->dda->walldist = (ptr->dda->map_y - ptr->player->pos_y +
+			(1 - ptr->dda->stepy) / 2) / ptr->dda->raydir_y;
 }
 
 static void		check_side(t_ptr *ptr)
@@ -71,6 +92,7 @@ void			run_dda(t_ptr *ptr)
 	{
 		calc_dda(ptr);
 		run_draw(ptr);
+		ptr->sp->buffer[ptr->dda->screenx] = ptr->dda->walldist;
 		ptr->dda->screenx++;
 	}
 }
