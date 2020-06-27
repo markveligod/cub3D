@@ -75,9 +75,11 @@ static void		get_f_c(char *line, int *rgb)
 	r = ft_atoi(&line[i]);
 	while (line[i] != ',')
 		i++;
+	i++;
 	g = ft_atoi(&line[i]);
 	while (line[i] != ',')
 		i++;
+	i++;
 	b = ft_atoi(&line[i]);
 	if (!((r >= 0 && r <= 255) && ((g >= 0 && g <= 255)) && ((b >= 0 && b <= 255))))
 		error("RGB within [0-255] (6_6)");

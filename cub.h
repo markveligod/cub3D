@@ -79,6 +79,11 @@ typedef struct	s_dda
 	int			lineheight;
 	int			drawstart;
 	int			drawend;
+	double		wallx;
+	int			textx;
+	int			texty;
+	double		step;
+	double		textpos;
 }				t_dda;
 
 typedef struct	s_match

@@ -3,7 +3,7 @@
 static void		is_side(t_ptr *ptr)
 {
 	ptr->dda->hit = 1;
-	if (!ptr->dda->side)
+	if (ptr->dda->side == 0)
 	{
 		if (ptr->dda->raydir_x < 0)
 			ptr->dda->side = 1;
@@ -92,7 +92,6 @@ void			run_dda(t_ptr *ptr)
 	{
 		calc_dda(ptr);
 		run_draw(ptr);
-		ptr->sp->buffer[ptr->dda->screenx] = ptr->dda->walldist;
 		ptr->dda->screenx++;
 	}
 }
