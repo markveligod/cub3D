@@ -26,6 +26,11 @@ static int		play(t_ptr *ptr)
 void			start_game(t_ptr *ptr)
 {
 	init_game_struct(ptr);
+	add_text(ptr, 1, ft_strtrim(ptr->param->north, " "));
+	add_text(ptr, 2, ft_strtrim(ptr->param->south, " "));
+	add_text(ptr, 3, ft_strtrim(ptr->param->west, " "));
+	add_text(ptr, 4, ft_strtrim(ptr->param->east, " "));
+	add_text(ptr, 5, ft_strtrim(ptr->param->sprite, " "));
 	init_game_param(ptr);
 	init_dda_struct(ptr);
 	ptr->mlx->win_ptr = mlx_new_window(ptr->mlx->mlx_ptr, ptr->param->x, ptr->param->y, "CUB3D GAME");

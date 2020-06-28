@@ -73,13 +73,13 @@ static int		draw_texture(t_ptr *ptr, int y)
 	ptr->dda->textpos = (ptr->dda->drawstart - ptr->param->y / 2 + ptr->dda->lineheight / 2) * ptr->dda->step;
 	while (y < ptr->dda->drawend)
 	{
-		ptr->dda->texty = (int)ptr->dda->textpos & (ptr->img[ptr->dda->side]->height * ptr->dda->texty + ptr->dda->textx);
+		ptr->dda->texty = (int)ptr->dda->textpos & (ptr->img[ptr->dda->side]->height - 1);
 		ptr->dda->textpos += ptr->dda->step;
 		ptr->img[0]->img_data[ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] =
 		ptr->img[ptr->dda->side]->img_data[ptr->dda->textx * (ptr->img[ptr->dda->side]->bpp / 8) + ptr->dda->texty * ptr->img[ptr->dda->side]->size_line];
 		ptr->img[0]->img_data[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] =
 		ptr->img[ptr->dda->side]->img_data[(ptr->dda->textx * (ptr->img[ptr->dda->side]->bpp / 8) + ptr->dda->texty * ptr->img[ptr->dda->side]->size_line) + 1];
-				ptr->img[0]->img_data[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] =
+		ptr->img[0]->img_data[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] =
 		ptr->img[ptr->dda->side]->img_data[(ptr->dda->textx * (ptr->img[ptr->dda->side]->bpp / 8) + ptr->dda->texty * ptr->img[ptr->dda->side]->size_line) + 2];
 		y++;
 		i++;
@@ -99,6 +99,7 @@ void			run_draw(t_ptr *ptr)
 	ptr->dda->drawend = ptr->dda->lineheight/ 2 + ptr->param->y / 2;
 	if (ptr->dda->drawend > ptr->param->y)
 		ptr->dda->drawend = ptr->param->y - 1;
+	
 	y += draw_ceilling(ptr, y);
 	y += draw_texture(ptr, y);
 	draw_floor(ptr, y);

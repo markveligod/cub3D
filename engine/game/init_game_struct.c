@@ -55,7 +55,7 @@ void			init_game_param(t_ptr *ptr)
 	set_dir_plane(ptr, ptr->param->dir_player);
 }
 
-static void		add_text(t_ptr *ptr, int flag, char *path)
+void			add_text(t_ptr *ptr, int flag, char *path)
 {
 	if (!(ptr->img[flag]->img_ptr = mlx_xpm_file_to_image(ptr->mlx->mlx_ptr, path, &ptr->img[flag]->width, &ptr->img[flag]->height)))
 		error("Texture path isn't valid");
@@ -72,8 +72,10 @@ void			init_game_struct(t_ptr *ptr)
 	ptr->mlx->mlx_ptr = mlx_init();
 	if (!(ptr->player = (t_player *)malloc(sizeof(t_player))))
 		error("struct player doesn't allocate in memory (*_*)");
-	if (!(ptr->sp = (t_sprite *)malloc(sizeof(t_sprite))))
-		error("Struct mlx doesn't allocate in memory (*_*)");
+	if (!(ptr->b = (t_barrel *)malloc(sizeof(t_barrel))))
+		error("Something went wrong with sprite initialization");
+	if (!(ptr->b->buffer = malloc(sizeof(double) * (ptr->param->x + 1))))
+		error("Memory allocation failed");
 	if (!(ptr->img = (t_image **)malloc(sizeof(t_image *) * 7)))
 		error("struct image** doesn't allocate in memory (*_*)");
 	ft_bzero(ptr->img, sizeof(t_image *) * 7);
@@ -84,8 +86,4 @@ void			init_game_struct(t_ptr *ptr)
 		ft_bzero(ptr->img[i], sizeof(t_image));
 		i++;
 	}
-	add_text(ptr, 1, ft_strtrim(ptr->param->north, " "));
-	add_text(ptr, 2, ft_strtrim(ptr->param->south, " "));
-	add_text(ptr, 3, ft_strtrim(ptr->param->west, " "));
-	add_text(ptr, 4, ft_strtrim(ptr->param->east, " "));
 }

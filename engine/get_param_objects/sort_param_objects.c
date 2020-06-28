@@ -1,6 +1,6 @@
 #include "../../cub.h"
 
-static void		push_param_object(char **param, char *line)
+void			push_param_object(char **param, char *line)
 {
 	int i;
 

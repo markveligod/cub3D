@@ -1,11 +1,11 @@
 R 600 400
-NO ./texture/text.xpm
-SO ./texture/text.xpm
-WE ./texture/text.xpm
-EA ./texture/text.xpm
+NO ./texture/WALL46.xpm
+SO ./texture/WALL2.xpm
+WE ./texture/WALL0.xpm
+EA ./texture/WALL4.xpm
 S ./texture/greenlight.xpm
-F 0,0,0
-C 0,0,0
+F 100,100,100
+C 80,80,80
 
 
         1111111111111111111111111

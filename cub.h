@@ -109,34 +109,34 @@ typedef struct	s_image
 	int			endian;
 }				t_image;
 
-typedef struct	s_sprite
+typedef	struct	s_barrel
 {
-	double		*buffer;
 	int			nb_sprite;
-	double		sprite_x;
-	double		sprite_y;
-	double		inv_det;
-	double		transform_x;
-	double		transform_y;
-	int			sprite_screenx;
-	int			sprite_height;
-	int			drawstart_y;
-	int			drawend_y;
-	int			sprite_width;
-	int			drawstart_x;
-	int			drawend_x;
+	double		*buffer;
+	double		spritex;
+	double		spritey;
+	double		invdet;
+	double		transformx;
+	double		transformy;
+	int			spritescreenx;
+	int			spriteheight;
+	int			drawstarty;
+	int			drawendy;
+	int			spritewidth;
+	int			drawstartx;
+	int			drawendx;
 	int			stripe;
 	int			d;
-	int			tex_x;
-	int			tex_y;
-}				t_sprite;
+	int			texx;
+	int			texy;
+}				t_barrel;
 
-typedef struct	s_distz
+typedef	struct	s_sprite
 {
-	double		x;
-	double		y;
-	double		dist_z;
-}				t_distz;
+	int			x;
+	int			y;
+	double		s_dist;
+}				t_sprite;
 
 typedef struct	s_ptr
 {
@@ -147,8 +147,8 @@ typedef struct	s_ptr
 	t_match		*match;
 	t_image		**img;
 	t_dda		*dda;
-	t_sprite	*sp;
-	t_distz		**distz
+	t_barrel	*b;
+	t_sprite	**z;
 }				t_ptr;
 
 /*
@@ -186,6 +186,8 @@ void			init_param_objects(t_ptr *ptr);
 void			get_param_objects(int fd, t_ptr *ptr);
 void			sort_param_objects(char *line, t_ptr *ptr);
 void			get_param_map(int fd, char *line, t_ptr *ptr);
+void			push_param_object(char **param, char *line);
+void			init_sprite_struct(t_ptr *ptr);
 
 /*
  * Prototype dda param
@@ -193,6 +195,7 @@ void			get_param_map(int fd, char *line, t_ptr *ptr);
 void			init_dda_struct(t_ptr *ptr);
 void			run_dda(t_ptr *ptr);
 void			run_draw(t_ptr *ptr);
+void			draw_sprite(t_ptr *ptr);
 
 /*
  * Prototype game param
@@ -204,5 +207,6 @@ void			forward_back_keys(t_ptr *ptr, int key);
 void			rot_left_right_keys(t_ptr *ptr, int key);
 void			left_right_keys(t_ptr *ptr, int key);
 void			init_text_param(t_ptr *ptr);
+void			add_text(t_ptr *ptr, int flag, char *path);
 
 #endif

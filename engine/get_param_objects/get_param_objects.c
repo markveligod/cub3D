@@ -1,6 +1,6 @@
 #include "../../cub.h"
 
-void	get_param_objects(int fd, t_ptr *ptr)
+void			get_param_objects(int fd, t_ptr *ptr)
 {
 	int		count;
 	char	*line;
