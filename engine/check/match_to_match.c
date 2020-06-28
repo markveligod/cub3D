@@ -55,11 +55,11 @@ static void		push_next(char *line, t_ptr *ptr)
 
 static void		check_match(t_ptr *ptr)
 {
-	if ((ptr->match->line_down_1 < ptr->match->line_up_1 && ptr->match->line_down_2 < ptr->match->line_up_1) ||
-	(ptr->match->line_down_1 > ptr->match->line_up_2 && ptr->match->line_down_2 > ptr->match->line_up_2))
+	if ((ptr->match->line_down_1 < (ptr->match->line_up_1 - 1) && ptr->match->line_down_2 < (ptr->match->line_up_1 - 1)) ||
+	(ptr->match->line_down_1 > (ptr->match->line_up_2 + 1) && ptr->match->line_down_2 > (ptr->match->line_up_2 + 1)))
 		error("The left edge does not close the map. (@_@)");
-	if ((ptr->match->line_down_3 < ptr->match->line_up_3 && ptr->match->line_down_4 < ptr->match->line_up_3) ||
-	(ptr->match->line_down_3 > ptr->match->line_up_4 && ptr->match->line_down_4 > ptr->match->line_up_4))
+	if ((ptr->match->line_down_3 < (ptr->match->line_up_3 - 1) && ptr->match->line_down_4 < (ptr->match->line_up_3 - 1)) ||
+	(ptr->match->line_down_3 > (ptr->match->line_up_4 + 1) && ptr->match->line_down_4 > (ptr->match->line_up_4 + 1)))
 		error("The right edge does not close the map. (@_@)");
 	ptr->match->line_up_1 = ptr->match->line_down_1;
 	ptr->match->line_up_2 = ptr->match->line_down_2;
