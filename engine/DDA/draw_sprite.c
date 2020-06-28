@@ -1,6 +1,6 @@
 #include "../../cub.h"
 
-static int		check_black(t_ptr *ptr, int y)
+static int		check_black(t_ptr *ptr)
 {
 	return (ptr->img[5]->img_data[ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8] == 0 &&
 	ptr->img[5]->img_data[(ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8) + 1] == 0 &&
@@ -59,9 +59,12 @@ static void		put_sprite(t_ptr *ptr)
 			{
 				ptr->b->d = y * 256 - ptr->param->y * 128 + ptr->b->spriteheight * 128;
 				ptr->b->texy = ((ptr->b->d * ptr->img[5]->height) / ptr->b->spriteheight) / 256;
-				ptr->img[0]->img_data[ptr->b->stripe * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] = ptr->img[5]->img_data[ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8];
-				ptr->img[0]->img_data[(ptr->b->stripe * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] = ptr->img[5]->img_data[(ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8) + 1];
-				ptr->img[0]->img_data[(ptr->b->stripe * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] = ptr->img[5]->img_data[(ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8) + 2];
+				if (!(check_black(ptr)))
+				{
+					ptr->img[0]->img_data[ptr->b->stripe * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] = ptr->img[5]->img_data[ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8];
+					ptr->img[0]->img_data[(ptr->b->stripe * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] = ptr->img[5]->img_data[(ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8) + 1];
+					ptr->img[0]->img_data[(ptr->b->stripe * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] = ptr->img[5]->img_data[(ptr->img[5]->size_line * ptr->b->texy + ptr->b->texx * ptr->img[5]->bpp / 8) + 2];
+				}
 				y++;
 			}
 		}
