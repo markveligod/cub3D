@@ -169,6 +169,7 @@ int				get_next_line(int fd, char **line);
 char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 char			*ft_strtrim(char const *s1, char const *set);
+int				ft_strncmp(const char *str1, const char *str2, size_t n);
 
 /*
  * Prototype check 
@@ -208,5 +209,7 @@ void			rot_left_right_keys(t_ptr *ptr, int key);
 void			left_right_keys(t_ptr *ptr, int key);
 void			init_text_param(t_ptr *ptr);
 void			add_text(t_ptr *ptr, int flag, char *path);
+unsigned char	*create_file_header(int res_y, int res_x);
+unsigned char	*create_bitmap_header(int res_y, int res_x);
 
 #endif
