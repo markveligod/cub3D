@@ -1,5 +1,8 @@
 #include "../../cub.h"
 
+/*
+** Getting map data from files and creating a two-dimensional array
+*/
 void		get_param_map(int fd, char *line, t_ptr *ptr)
 {
 	int count;

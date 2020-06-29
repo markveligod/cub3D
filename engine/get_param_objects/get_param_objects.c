@@ -1,5 +1,8 @@
 #include "../../cub.h"
 
+/*
+** Start function for getting all data from a file
+*/
 void			get_param_objects(int fd, t_ptr *ptr)
 {
 	int		count;

@@ -1,5 +1,8 @@
 #include "../../cub.h"
 
+/*
+** Auxiliary function for adding texture and sprite parameters
+*/
 void			push_param_object(char **param, char *line)
 {
 	int i;
@@ -13,6 +16,9 @@ void			push_param_object(char **param, char *line)
 		error("Incorrect path to the texture (*_*)");
 }
 
+/*
+** The function records display parameters
+*/
 static void		get_resolution(char *line, t_ptr *ptr)
 {
 	int i;
@@ -35,6 +41,9 @@ static void		get_resolution(char *line, t_ptr *ptr)
 	ptr->check->r++;
 }
 
+/*
+** The function writes the parameters of the texture and sprite
+*/
 static void		get_texture(char *line, t_ptr *ptr, char *flags, int i)
 {
 	if (flags[i] == 'N' && flags[i + 1] == 'O')
@@ -64,6 +73,9 @@ static void		get_texture(char *line, t_ptr *ptr, char *flags, int i)
 	}
 }
 
+/*
+** Function for getting the color of the ceiling and floor
+*/
 static void		get_f_c(char *line, int *rgb)
 {
 	int r;
@@ -88,6 +100,9 @@ static void		get_f_c(char *line, int *rgb)
 	*rgb = (*rgb << 8) + b;
 }
 
+/*
+** The main function for sorting incoming parameters
+*/
 void			sort_param_objects(char *line, t_ptr *ptr)
 {
 	int i;

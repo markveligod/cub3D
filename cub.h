@@ -9,8 +9,6 @@
 # include <mlx.h>
 # include <unistd.h>
 
-#include <stdio.h>
-
 typedef struct	s_check
 {
 	short int	r;
@@ -152,13 +150,13 @@ typedef struct	s_ptr
 }				t_ptr;
 
 /*
- * Prototype error
+** Prototype error
 */
 void			error(char *str);
 int				close_win(void);
 
 /*
- * Prototype utils
+** Prototype utils
 */
 int				ft_strlen(const char *str);
 int				ft_atoi(const char *str);
@@ -172,7 +170,7 @@ char			*ft_strtrim(char const *s1, char const *set);
 int				ft_strncmp(const char *str1, const char *str2, size_t n);
 
 /*
- * Prototype check 
+** Prototype check 
 */
 int				check_filename(char *filename);
 void			init_check_struct(t_ptr *ptr);
@@ -181,7 +179,7 @@ void			check_param_objects(t_ptr *ptr);
 void			match_to_match(char **arr, t_ptr *ptr);
 
 /*
- * Prototype get param obj
+** Prototype get param obj
 */
 void			init_param_objects(t_ptr *ptr);
 void			get_param_objects(int fd, t_ptr *ptr);
@@ -191,7 +189,7 @@ void			push_param_object(char **param, char *line);
 void			init_sprite_struct(t_ptr *ptr);
 
 /*
- * Prototype dda param
+** Prototype dda param
 */
 void			init_dda_struct(t_ptr *ptr);
 void			run_dda(t_ptr *ptr);
@@ -199,7 +197,7 @@ void			run_draw(t_ptr *ptr);
 void			draw_sprite(t_ptr *ptr);
 
 /*
- * Prototype game param
+** Prototype game param
 */
 void			start_game(t_ptr *ptr);
 void			init_game_struct(t_ptr *ptr);

@@ -1,5 +1,8 @@
 #include "../../cub.h"
 
+/*
+** Function that records the coordinates of sprites
+*/
 static void		push_sprite(t_ptr *ptr)
 {
 	int	x;
@@ -25,6 +28,9 @@ static void		push_sprite(t_ptr *ptr)
 	}
 }
 
+/*
+** Checking the number of sprites on the map
+*/
 static void		check_nb_sprite(t_ptr *ptr)
 {
 	int x;
@@ -45,6 +51,9 @@ static void		check_nb_sprite(t_ptr *ptr)
 	}
 }
 
+/*
+** Function for initializing the sprite structure
+*/
 void			init_sprite_struct(t_ptr *ptr)
 {
 	int	x;
@@ -62,4 +71,3 @@ void			init_sprite_struct(t_ptr *ptr)
 	}
 	push_sprite(ptr);
 }
-

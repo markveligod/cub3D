@@ -1,5 +1,8 @@
 #include "cub.h"
 
+/*
+** A function that throws pixels to a bmp file
+*/
 static void		push_img_to_bmp(t_ptr *ptr, int fd)
 {
 	unsigned char	rgb[3];
@@ -26,6 +29,10 @@ static void		push_img_to_bmp(t_ptr *ptr, int fd)
 	}
 }
 
+
+/*
+** A function that draws a single frame
+*/
 static void		start_render(t_ptr *ptr, int fd)
 {
 	init_check_struct(ptr);
@@ -47,6 +54,9 @@ static void		start_render(t_ptr *ptr, int fd)
 	mlx_put_image_to_window(ptr->mlx->mlx_ptr, ptr->mlx->win_ptr, ptr->img[0]->img_ptr, 0, 0);
 }
 
+/*
+** General function that creating bmp file
+*/
 static void		creaty_bmp(t_ptr *ptr, int fd, char *filename)
 {
 	unsigned char			*file_header;
@@ -66,6 +76,9 @@ static void		creaty_bmp(t_ptr *ptr, int fd, char *filename)
 	close_win();
 }
 
+/*
+** Main function
+*/
 int				main(int ac, char **av)
 {
 	int		fd;

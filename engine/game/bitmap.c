@@ -1,5 +1,9 @@
 #include "../../cub.h"
 
+/*
+** 
+** https://stackoverflow.com/questions/742236/how-to-create-a-bmp-file-from-byte-in-c-sharp
+*/
 unsigned char	*create_file_header(int res_y, int res_x)
 {
 	int						nb_octet;
