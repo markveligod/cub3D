@@ -1,86 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_draw.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 13:28:28 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 13:28:31 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
-static int		draw_ceilling(t_ptr *ptr, int y)
+static int		draw_ceilling(t_ptr *p, int y)
 {
 	int r;
 	int g;
 	int b;
 
-	r = ptr->param->c_rgb % 256;
-	g = (ptr->param->c_rgb / 256) % 256;
-	b = ((ptr->param->c_rgb / 256) / 256) % 256;
-	while (y < ptr->dda->drawstart)
+	r = p->p->c_rgb % 256;
+	g = (p->p->c_rgb / 256) % 256;
+	b = ((p->p->c_rgb / 256) / 256) % 256;
+	while (y < p->dda->drawstart)
 	{
-		ptr->img[0]->img_data
-		[ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] = r;
-		ptr->img[0]->img_data
-		[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] = g;
-		ptr->img[0]->img_data
-		[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] = b;
+		p->img[0]->img_data
+		[p->dda->screenx * p->img[0]->bpp / 8 + p->img[0]->size_line * y] = r;
+		p->img[0]->img_data
+		[(p->dda->screenx * p->img[0]->bpp / 8 + p->img[0]->size_line * y) +
+		1] = g;
+		p->img[0]->img_data
+		[(p->dda->screenx * p->img[0]->bpp / 8 + p->img[0]->size_line * y) +
+		2] = b;
 		y++;
 	}
 	return (y);
 }
 
-static void		draw_floor(t_ptr *ptr, int y)
+static void		draw_floor(t_ptr *p, int y)
 {
 	int r;
 	int g;
 	int b;
 
-	r = ptr->param->f_rgb % 256;
-	g = (ptr->param->f_rgb / 256) % 256;
-	b = ((ptr->param->f_rgb / 256) / 256) % 256;
-	while (y < ptr->param->y)
+	r = p->p->f_rgb % 256;
+	g = (p->p->f_rgb / 256) % 256;
+	b = ((p->p->f_rgb / 256) / 256) % 256;
+	while (y < p->p->y)
 	{
-		ptr->img[0]->img_data
-		[ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] = r;
-		ptr->img[0]->img_data
-		[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] = g;
-		ptr->img[0]->img_data
-		[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] = b;
+		p->img[0]->img_data
+		[p->dda->screenx * p->img[0]->bpp / 8 + p->img[0]->size_line * y] = r;
+		p->img[0]->img_data
+		[(p->dda->screenx * p->img[0]->bpp / 8 + p->img[0]->size_line * y) +
+		1] = g;
+		p->img[0]->img_data
+		[(p->dda->screenx * p->img[0]->bpp / 8 + p->img[0]->size_line * y) +
+		2] = b;
 		y++;
 	}
 }
 
-static void		set_texture(t_ptr *ptr)
+static void		set_texture(t_ptr *p)
 {
-	if (ptr->dda->side == 1 || ptr->dda->side == 2)
+	if (p->dda->side == 1 || p->dda->side == 2)
 	{
-		ptr->dda->wallx = ptr->player->pos_y + ptr->dda->walldist * ptr->dda->raydir_y;
-		ptr->dda->wallx -= floor(ptr->dda->wallx);
-		ptr->dda->textx = (int)(ptr->dda->wallx * (double)ptr->img[ptr->dda->side]->width);
-		if (ptr->dda->raydir_x > 0)
-			ptr->dda->textx = ptr->img[ptr->dda->side]->width - ptr->dda->textx - 1;
+		p->dda->wallx = p->pl->p_y + p->dda->walldist * p->dda->raydir_y;
+		p->dda->wallx -= floor(p->dda->wallx);
+		p->dda->textx = (int)(p->dda->wallx * (double)p->img[p->dda->side]->
+		width);
+		if (p->dda->raydir_x > 0)
+			p->dda->textx = p->img[p->dda->side]->width - p->dda->textx - 1;
 	}
-	else if (ptr->dda->side == 3 || ptr->dda->side == 4)
+	else if (p->dda->side == 3 || p->dda->side == 4)
 	{
-		ptr->dda->wallx = ptr->player->pos_x + ptr->dda->walldist * ptr->dda->raydir_x;
-		ptr->dda->wallx -= floor(ptr->dda->wallx);
-		ptr->dda->textx = (int)(ptr->dda->wallx * (double)ptr->img[ptr->dda->side]->width);
-		if (ptr->dda->raydir_y < 0)
-			ptr->dda->textx = ptr->img[ptr->dda->side]->width - ptr->dda->textx - 1;
+		p->dda->wallx = p->pl->p_x + p->dda->walldist * p->dda->raydir_x;
+		p->dda->wallx -= floor(p->dda->wallx);
+		p->dda->textx = (int)(p->dda->wallx * (double)p->img[p->dda->side]->
+		width);
+		if (p->dda->raydir_y < 0)
+			p->dda->textx = p->img[p->dda->side]->width - p->dda->textx - 1;
 	}
 }
 
-static int		draw_texture(t_ptr *ptr, int y)
+static int		draw_texture(t_ptr *p, int y)
 {
 	int i;
 
 	i = 0;
-	set_texture(ptr);
-	ptr->dda->step = 1.0 * ptr->img[ptr->dda->side]->height / ptr->dda->lineheight;
-	ptr->dda->textpos = (ptr->dda->drawstart - ptr->param->y / 2 + ptr->dda->lineheight / 2) * ptr->dda->step;
-	while (y < ptr->dda->drawend)
+	set_texture(p);
+	p->dda->step = 1.0 * p->img[p->dda->side]->height / p->dda->lineheight;
+	p->dda->textpos = (p->dda->drawstart - p->p->y / 2 + p->dda->lineheight
+	/ 2) * p->dda->step;
+	while (y < p->dda->drawend)
 	{
-		ptr->dda->texty = (int)ptr->dda->textpos & (ptr->img[ptr->dda->side]->height - 1);
-		ptr->dda->textpos += ptr->dda->step;
-		ptr->img[0]->img_data[ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y] =
-		ptr->img[ptr->dda->side]->img_data[ptr->dda->textx * (ptr->img[ptr->dda->side]->bpp / 8) + ptr->dda->texty * ptr->img[ptr->dda->side]->size_line];
-		ptr->img[0]->img_data[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 1] =
-		ptr->img[ptr->dda->side]->img_data[(ptr->dda->textx * (ptr->img[ptr->dda->side]->bpp / 8) + ptr->dda->texty * ptr->img[ptr->dda->side]->size_line) + 1];
-		ptr->img[0]->img_data[(ptr->dda->screenx * ptr->img[0]->bpp / 8 + ptr->img[0]->size_line * y) + 2] =
-		ptr->img[ptr->dda->side]->img_data[(ptr->dda->textx * (ptr->img[ptr->dda->side]->bpp / 8) + ptr->dda->texty * ptr->img[ptr->dda->side]->size_line) + 2];
+		p->dda->texty = (int)p->dda->textpos & (p->img[p->dda->side]->height
+		- 1);
+		p->dda->textpos += p->dda->step;
+		put_pixel_texture(p, y);
 		y++;
 		i++;
 	}
@@ -92,14 +107,13 @@ void			run_draw(t_ptr *ptr)
 	int y;
 
 	y = 0;
-	ptr->dda->lineheight = (int)(ptr->param->y / ptr->dda->walldist);
-	ptr->dda->drawstart = -ptr->dda->lineheight / 2 + ptr->param->y / 2;
+	ptr->dda->lineheight = (int)(ptr->p->y / ptr->dda->walldist);
+	ptr->dda->drawstart = -ptr->dda->lineheight / 2 + ptr->p->y / 2;
 	if (ptr->dda->drawstart < 0)
 		ptr->dda->drawstart = 0;
-	ptr->dda->drawend = ptr->dda->lineheight/ 2 + ptr->param->y / 2;
-	if (ptr->dda->drawend > ptr->param->y)
-		ptr->dda->drawend = ptr->param->y - 1;
-	
+	ptr->dda->drawend = ptr->dda->lineheight / 2 + ptr->p->y / 2;
+	if (ptr->dda->drawend > ptr->p->y)
+		ptr->dda->drawend = ptr->p->y - 1;
 	y += draw_ceilling(ptr, y);
 	y += draw_texture(ptr, y);
 	draw_floor(ptr, y);

@@ -1,70 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_control_keys.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 11:45:17 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 11:45:28 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
-void		forward_back_keys(t_ptr *ptr, int key)
+/*
+** Function for changing the frame forward or backward
+*/
+
+void		forward_back_keys(t_ptr *p, int key)
 {
 	if (key == 13)
 	{
-		if (ptr->param->split_map[(int)(ptr->player->pos_x + ptr->player->dir_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '1' &&
-		ptr->param->split_map[(int)(ptr->player->pos_x + ptr->player->dir_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '2')
-			ptr->player->pos_x += ptr->player->dir_x * ptr->player->movespeed;
-		if (ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y + ptr->player->dir_y * ptr->player->movespeed)] != '1' &&
-		ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y + ptr->player->dir_y * ptr->player->movespeed)] != '2')
-			ptr->player->pos_y += ptr->player->dir_y * ptr->player->movespeed;
+		if (p->p->split_map[(int)(p->pl->p_x + p->pl->d_x * p->pl->ms)]
+		[(int)p->pl->p_y] != '1' && p->p->split_map[(int)(p->pl->p_x +
+		p->pl->d_x * p->pl->ms)][(int)p->pl->p_y] != '2')
+			p->pl->p_x += p->pl->d_x * p->pl->ms;
+		if (p->p->split_map[(int)p->pl->p_x][(int)(p->pl->p_y +
+		p->pl->d_y * p->pl->ms)] != '1' && p->p->split_map[(int)p->pl->p_x]
+		[(int)(p->pl->p_y + p->pl->d_y * p->pl->ms)] != '2')
+			p->pl->p_y += p->pl->d_y * p->pl->ms;
 	}
 	if (key == 1)
 	{
-		if (ptr->param->split_map[(int)(ptr->player->pos_x - ptr->player->dir_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '1' &&
-	ptr->param->split_map[(int)(ptr->player->pos_x - ptr->player->dir_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '2')
-		ptr->player->pos_x -= ptr->player->dir_x * ptr->player->movespeed;
-	if (ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y - ptr->player->dir_y * ptr->player->movespeed)] != '1' &&
-	ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y - ptr->player->dir_y * ptr->player->movespeed)] != '2')
-		ptr->player->pos_y -= ptr->player->dir_y * ptr->player->movespeed;
+		if (p->p->split_map[(int)(p->pl->p_x - p->pl->d_x * p->pl->ms)]
+		[(int)p->pl->p_y] != '1' && p->p->split_map[(int)(p->pl->p_x -
+		p->pl->d_x * p->pl->ms)][(int)p->pl->p_y] != '2')
+			p->pl->p_x -= p->pl->d_x * p->pl->ms;
+		if (p->p->split_map[(int)p->pl->p_x][(int)(p->pl->p_y -
+		p->pl->d_y * p->pl->ms)] != '1' && p->p->split_map[(int)p->pl->p_x]
+		[(int)(p->pl->p_y - p->pl->d_y * p->pl->ms)] != '2')
+			p->pl->p_y -= p->pl->d_y * p->pl->ms;
 	}
 }
 
-void		rot_left_right_keys(t_ptr *ptr, int key)
-{
-	double olddir_x;
-	double oldplane_x;
+/*
+** Function for changing the rotate to left or right frame
+*/
 
+void		rot_left_right_keys(t_ptr *p, int key, double olddx, double oldplx)
+{
 	if (key == 123)
 	{
-		olddir_x = ptr->player->dir_x;
-		ptr->player->dir_x = ptr->player->dir_x * cos(ptr->player->rotspeed) - ptr->player->dir_y * sin(ptr->player->rotspeed);
-		ptr->player->dir_y = olddir_x * (ptr->player->rotspeed) + ptr->player->dir_y * cos(ptr->player->rotspeed);
-		oldplane_x = ptr->player->plane_x;
-		ptr->player->plane_x = ptr->player->plane_x * cos(ptr->player->rotspeed) - ptr->player->plane_y * sin(ptr->player->rotspeed);
-		ptr->player->plane_y = oldplane_x * sin(ptr->player->rotspeed) + ptr->player->plane_y * cos(ptr->player->rotspeed);
+		olddx = p->pl->d_x;
+		p->pl->d_x = p->pl->d_x * cos(p->pl->rots) - p->pl->d_y *
+		sin(p->pl->rots);
+		p->pl->d_y = olddx * (p->pl->rots) + p->pl->d_y * cos(p->pl->rots);
+		oldplx = p->pl->pl_x;
+		p->pl->pl_x = p->pl->pl_x * cos(p->pl->rots) - p->pl->pl_y *
+		sin(p->pl->rots);
+		p->pl->pl_y = oldplx * sin(p->pl->rots) + p->pl->pl_y *
+		cos(p->pl->rots);
 	}
 	if (key == 124)
 	{
-		olddir_x = ptr->player->dir_x;
-		ptr->player->dir_x = ptr->player->dir_x * cos(-ptr->player->rotspeed) - ptr->player->dir_y * sin(-ptr->player->rotspeed);
-		ptr->player->dir_y = olddir_x * (-ptr->player->rotspeed) + ptr->player->dir_y * cos(-ptr->player->rotspeed);
-		oldplane_x = ptr->player->plane_x;
-		ptr->player->plane_x = ptr->player->plane_x * cos(-ptr->player->rotspeed) - ptr->player->plane_y * sin(-ptr->player->rotspeed);
-		ptr->player->plane_y = oldplane_x * sin(-ptr->player->rotspeed) + ptr->player->plane_y * cos(-ptr->player->rotspeed);
+		olddx = p->pl->d_x;
+		p->pl->d_x = p->pl->d_x * cos(-p->pl->rots) - p->pl->d_y *
+		sin(-p->pl->rots);
+		p->pl->d_y = olddx * (-p->pl->rots) + p->pl->d_y * cos(-p->pl->rots);
+		oldplx = p->pl->pl_x;
+		p->pl->pl_x = p->pl->pl_x * cos(-p->pl->rots) - p->pl->pl_y *
+		sin(-p->pl->rots);
+		p->pl->pl_y = oldplx * sin(-p->pl->rots) + p->pl->pl_y *
+		cos(-p->pl->rots);
 	}
 }
+
+/*
+** Function for changing the left or right frame
+*/
 
 void		left_right_keys(t_ptr *ptr, int key)
 {
 	if (key == 2)
 	{
-		if (ptr->param->split_map[(int)(ptr->player->pos_x + ptr->player->plane_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '1' &&
-		ptr->param->split_map[(int)(ptr->player->pos_x + ptr->player->plane_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '2')
-			ptr->player->pos_x += ptr->player->plane_x * ptr->player->movespeed;
-		if (ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y + ptr->player->plane_y * ptr->player->movespeed)] != '1' &&
-		ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y + ptr->player->plane_y * ptr->player->movespeed)] != '2')
-			ptr->player->pos_y += ptr->player->plane_y * ptr->player->movespeed;
+		if (ptr->p->split_map[(int)(ptr->pl->p_x + ptr->pl->pl_x * ptr->pl->ms)]
+		[(int)ptr->pl->p_y] != '1' && ptr->p->split_map[(int)(ptr->pl->p_x +
+		ptr->pl->pl_x * ptr->pl->ms)][(int)ptr->pl->p_y] != '2')
+			ptr->pl->p_x += ptr->pl->pl_x * ptr->pl->ms;
+		if (ptr->p->split_map[(int)ptr->pl->p_x][(int)(ptr->pl->p_y +
+		ptr->pl->pl_y * ptr->pl->ms)] != '1' && ptr->p->split_map[(int)
+		ptr->pl->p_x][(int)(ptr->pl->p_y + ptr->pl->pl_y * ptr->pl->ms)] != '2')
+			ptr->pl->p_y += ptr->pl->pl_y * ptr->pl->ms;
 	}
 	if (key == 0)
 	{
-		if (ptr->param->split_map[(int)(ptr->player->pos_x - ptr->player->plane_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '1' &&
-		ptr->param->split_map[(int)(ptr->player->pos_x - ptr->player->plane_x * ptr->player->movespeed)][(int)ptr->player->pos_y] != '2')
-			ptr->player->pos_x -= ptr->player->plane_x * ptr->player->movespeed;
-		if (ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y - ptr->player->plane_y * ptr->player->movespeed)] != '1' &&
-		ptr->param->split_map[(int)ptr->player->pos_x][(int)(ptr->player->pos_y - ptr->player->plane_y * ptr->player->movespeed)] != '2')
-			ptr->player->pos_y -= ptr->player->plane_y * ptr->player->movespeed;
+		if (ptr->p->split_map[(int)(ptr->pl->p_x - ptr->pl->pl_x * ptr->pl->ms)]
+		[(int)ptr->pl->p_y] != '1' && ptr->p->split_map[(int)(ptr->pl->p_x -
+		ptr->pl->pl_x * ptr->pl->ms)][(int)ptr->pl->p_y] != '2')
+			ptr->pl->p_x -= ptr->pl->pl_x * ptr->pl->ms;
+		if (ptr->p->split_map[(int)ptr->pl->p_x][(int)(ptr->pl->p_y -
+		ptr->pl->pl_y * ptr->pl->ms)] != '1' && ptr->p->split_map[(int)
+		ptr->pl->p_x][(int)(ptr->pl->p_y - ptr->pl->pl_y * ptr->pl->ms)] != '2')
+			ptr->pl->p_y -= ptr->pl->pl_y * ptr->pl->ms;
 	}
 }

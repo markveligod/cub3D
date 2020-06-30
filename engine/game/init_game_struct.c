@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game_struct.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 12:29:07 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 12:29:10 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 static int		is_player(char c)
@@ -5,29 +17,37 @@ static int		is_player(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
+/*
+** Function for determining the direction of the FOV by the map parameter
+*/
+
 static void		set_dir_plane(t_ptr *ptr, char flag)
 {
 	if (flag == 'N')
 	{
-		ptr->player->plane_y = 0.66;
-		ptr->player->dir_x = -1;
+		ptr->pl->pl_y = 0.66;
+		ptr->pl->d_x = -1;
 	}
 	else if (flag == 'S')
 	{
-		ptr->player->plane_y = -0.66;
-		ptr->player->dir_x = 1;
+		ptr->pl->pl_y = -0.66;
+		ptr->pl->d_x = 1;
 	}
 	else if (flag == 'W')
 	{
-		ptr->player->plane_x = -0.66;
-		ptr->player->dir_y = -1;
+		ptr->pl->pl_x = -0.66;
+		ptr->pl->d_y = -1;
 	}
 	else if (flag == 'E')
 	{
-		ptr->player->plane_x = 0.66;
-		ptr->player->dir_y = 1;
+		ptr->pl->pl_x = 0.66;
+		ptr->pl->d_y = 1;
 	}
 }
+
+/*
+** Function for initializing player parameters
+*/
 
 void			init_game_param(t_ptr *ptr)
 {
@@ -35,46 +55,56 @@ void			init_game_param(t_ptr *ptr)
 	int j;
 
 	i = -1;
-	while (ptr->param->split_map[++i])
+	while (ptr->p->split_map[++i])
 	{
 		j = -1;
-		while (ptr->param->split_map[i][++j])
-			if (is_player(ptr->param->split_map[i][j]))
+		while (ptr->p->split_map[i][++j])
+			if (is_player(ptr->p->split_map[i][j]))
 			{
-				ptr->player->pos_x = (double)i;
-				ptr->player->pos_y = (double)j;
+				ptr->pl->p_x = (double)i;
+				ptr->pl->p_y = (double)j;
 				break ;
 			}
 	}
-	ptr->player->dir_x = 0.0;
-	ptr->player->dir_y = 0.0;
-	ptr->player->plane_x = 0.0;
-	ptr->player->plane_y = 0.0;
-	ptr->player->movespeed = 0.1;
-	ptr->player->rotspeed = 0.1;
-	set_dir_plane(ptr, ptr->param->dir_player);
+	ptr->pl->d_x = 0.0;
+	ptr->pl->d_y = 0.0;
+	ptr->pl->pl_x = 0.0;
+	ptr->pl->pl_y = 0.0;
+	ptr->pl->ms = 0.1;
+	ptr->pl->rots = 0.1;
+	set_dir_plane(ptr, ptr->p->dir_pl);
 }
+
+/*
+** Function for adding textures in image array
+*/
 
 void			add_text(t_ptr *ptr, int flag, char *path)
 {
-	if (!(ptr->img[flag]->img_ptr = mlx_xpm_file_to_image(ptr->mlx->mlx_ptr, path, &ptr->img[flag]->width, &ptr->img[flag]->height)))
+	if (!(ptr->img[flag]->img_ptr = mlx_xpm_file_to_image(ptr->m->mlx_ptr,
+	path, &ptr->img[flag]->width, &ptr->img[flag]->height)))
 		error("Texture path isn't valid");
-	ptr->img[flag]->img_data = mlx_get_data_addr(ptr->img[flag]->img_ptr, &ptr->img[flag]->bpp, &ptr->img[flag]->size_line, &ptr->img[flag]->endian);
+	ptr->img[flag]->img_data = mlx_get_data_addr(ptr->img[flag]->img_ptr,
+	&ptr->img[flag]->bpp, &ptr->img[flag]->size_line, &ptr->img[flag]->endian);
 }
+
+/*
+** The main function to initialize the game structure
+*/
 
 void			init_game_struct(t_ptr *ptr)
 {
 	int i;
 
 	i = 0;
-	if (!(ptr->mlx = (t_mlxparam *)malloc(sizeof(t_mlxparam))))
+	if (!(ptr->m = (t_mlxparam *)malloc(sizeof(t_mlxparam))))
 		error("struct mlx doesn't allocate in memory (*_*)");
-	ptr->mlx->mlx_ptr = mlx_init();
-	if (!(ptr->player = (t_player *)malloc(sizeof(t_player))))
+	ptr->m->mlx_ptr = mlx_init();
+	if (!(ptr->pl = (t_player *)malloc(sizeof(t_player))))
 		error("struct player doesn't allocate in memory (*_*)");
 	if (!(ptr->b = (t_barrel *)malloc(sizeof(t_barrel))))
 		error("Something went wrong with sprite initialization");
-	if (!(ptr->b->buffer = malloc(sizeof(double) * (ptr->param->x + 1))))
+	if (!(ptr->b->buffer = malloc(sizeof(double) * (ptr->p->x + 1))))
 		error("Memory allocation failed");
 	if (!(ptr->img = (t_image **)malloc(sizeof(t_image *) * 7)))
 		error("struct image** doesn't allocate in memory (*_*)");

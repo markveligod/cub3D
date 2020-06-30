@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bitmap.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 11:32:26 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 11:33:08 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 /*
-** 
-** https://stackoverflow.com/questions/742236/how-to-create-a-bmp-file-from-byte-in-c-sharp
+** Functions for creating a title and label in a bmp file
+** https://stackoverflow.com/questions/742236
 */
+
 unsigned char	*create_file_header(int res_y, int res_x)
 {
 	int						nb_octet;

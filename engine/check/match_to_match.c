@@ -1,35 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   match_to_match.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 12:48:19 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 12:48:28 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
+
+/*
+** Function to initialize the structure match to match
+*/
 
 static void		init_match_struct(t_ptr *ptr)
 {
-	if(!(ptr->match = (t_match *)malloc(sizeof(t_match))))
+	if (!(ptr->mt = (t_match *)malloc(sizeof(t_match))))
 		error("struct check doesn't allocate in memory (*_*)");
-	ptr->match->line_up_1 = 0;
-	ptr->match->line_up_2 = 0;
-	ptr->match->line_up_3 = 0;
-	ptr->match->line_up_4 = 0;
-	ptr->match->line_down_1 = 0;
-	ptr->match->line_down_2 = 0;
-	ptr->match->line_down_3 = 0;
-	ptr->match->line_down_4 = 0;
+	ptr->mt->line_up_1 = 0;
+	ptr->mt->line_up_2 = 0;
+	ptr->mt->line_up_3 = 0;
+	ptr->mt->line_up_4 = 0;
+	ptr->mt->line_down_1 = 0;
+	ptr->mt->line_down_2 = 0;
+	ptr->mt->line_down_3 = 0;
+	ptr->mt->line_down_4 = 0;
 }
 
-static void		push_line_up_down(short int *l1, short int *l2, short int *l3, short int *l4, char *line)
-{
-	int j;
+/*
+** Function for casting two points (up line) left and right
+*/
 
-	j = 0;
+static void		push_line_up(char *line, t_ptr *ptr, int j)
+{
 	while (line[j] != '1')
 		j++;
-	*l1 = j;
-	*l3 = j;
+	ptr->mt->line_up_1 = j;
+	ptr->mt->line_up_3 = j;
 	while (line[j])
 		j++;
 	while (line[j] != '1')
 		j--;
-	*l2 = j;
-	*l4 = j;
+	ptr->mt->line_up_2 = j;
+	ptr->mt->line_up_4 = j;
 }
+
+/*
+** Function to move one line further
+*/
 
 static void		push_next(char *line, t_ptr *ptr)
 {
@@ -38,34 +59,46 @@ static void		push_next(char *line, t_ptr *ptr)
 	j = 0;
 	while (line[j] != '1')
 		j++;
-	ptr->match->line_down_1 = j;
+	ptr->mt->line_down_1 = j;
 	while (line[j] == '1')
 		j++;
-	ptr->match->line_down_2 = j - 1;
+	ptr->mt->line_down_2 = j - 1;
 	while (line[j])
 		j++;
 	j--;
 	while (line[j] != '1')
 		j--;
-	ptr->match->line_down_4 = j;
+	ptr->mt->line_down_4 = j;
 	while (line[j] == '1')
 		j--;
-	ptr->match->line_down_3 = j + 1;
+	ptr->mt->line_down_3 = j + 1;
 }
+
+/*
+** Function for checking two lines for unit matching
+*/
 
 static void		check_match(t_ptr *ptr)
 {
-	if ((ptr->match->line_down_1 < (ptr->match->line_up_1 - 1) && ptr->match->line_down_2 < (ptr->match->line_up_1 - 1)) ||
-	(ptr->match->line_down_1 > (ptr->match->line_up_2 + 1) && ptr->match->line_down_2 > (ptr->match->line_up_2 + 1)))
+	if ((ptr->mt->line_down_1 < (ptr->mt->line_up_1 - 1) &&
+	ptr->mt->line_down_2 < (ptr->mt->line_up_1 - 1)) ||
+	(ptr->mt->line_down_1 > (ptr->mt->line_up_2 + 1) &&
+	ptr->mt->line_down_2 > (ptr->mt->line_up_2 + 1)))
 		error("The left edge does not close the map. (@_@)");
-	if ((ptr->match->line_down_3 < (ptr->match->line_up_3 - 1) && ptr->match->line_down_4 < (ptr->match->line_up_3 - 1)) ||
-	(ptr->match->line_down_3 > (ptr->match->line_up_4 + 1) && ptr->match->line_down_4 > (ptr->match->line_up_4 + 1)))
+	if ((ptr->mt->line_down_3 < (ptr->mt->line_up_3 - 1) &&
+	ptr->mt->line_down_4 < (ptr->mt->line_up_3 - 1)) ||
+	(ptr->mt->line_down_3 > (ptr->mt->line_up_4 + 1) &&
+	ptr->mt->line_down_4 > (ptr->mt->line_up_4 + 1)))
 		error("The right edge does not close the map. (@_@)");
-	ptr->match->line_up_1 = ptr->match->line_down_1;
-	ptr->match->line_up_2 = ptr->match->line_down_2;
-	ptr->match->line_up_3 = ptr->match->line_down_3;
-	ptr->match->line_up_4 = ptr->match->line_down_4;
+	ptr->mt->line_up_1 = ptr->mt->line_down_1;
+	ptr->mt->line_up_2 = ptr->mt->line_down_2;
+	ptr->mt->line_up_3 = ptr->mt->line_down_3;
+	ptr->mt->line_up_4 = ptr->mt->line_down_4;
 }
+
+/*
+** The main function to start checking two lines of a map
+*/
 
 void			match_to_match(char **arr, t_ptr *ptr)
 {
@@ -78,15 +111,13 @@ void			match_to_match(char **arr, t_ptr *ptr)
 	{
 		if (i == 0)
 		{
-			push_line_up_down(&(ptr->match->line_up_1), &(ptr->match->line_up_2), &(ptr->match->line_up_3),
-			&(ptr->match->line_up_4), arr[i]);
+			push_line_up(arr[i], ptr, 0);
 			i++;
 			continue ;
 		}
 		if (arr[i + 1] == NULL)
 		{
-			push_line_up_down(&(ptr->match->line_down_1), &(ptr->match->line_down_2), &(ptr->match->line_down_3),
-			&(ptr->match->line_down_4), arr[i]);
+			push_next(arr[i], ptr);
 			check_match(ptr);
 			return ;
 		}

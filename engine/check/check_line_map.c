@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_line_map.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 12:37:45 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 12:37:50 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 void		check_line_map(char *line, t_ptr *ptr)
@@ -14,8 +26,8 @@ void		check_line_map(char *line, t_ptr *ptr)
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' ||
 		line[i] == 'W')
 		{
-			ptr->param->dir_player = line[i];
-			ptr->check->pos_player++;
+			ptr->p->dir_pl = line[i];
+			ptr->c->pos_player++;
 		}
 		i++;
 	}

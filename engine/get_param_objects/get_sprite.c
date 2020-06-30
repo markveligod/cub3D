@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_sprite.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 11:25:07 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 11:25:22 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 /*
 ** Function that records the coordinates of sprites
 */
+
 static void		push_sprite(t_ptr *ptr)
 {
 	int	x;
@@ -11,12 +24,12 @@ static void		push_sprite(t_ptr *ptr)
 
 	x = 0;
 	i = 0;
-	while (ptr->param->split_map[x])
+	while (ptr->p->split_map[x])
 	{
 		y = 0;
-		while (ptr->param->split_map[x][y])
+		while (ptr->p->split_map[x][y])
 		{
-			if (ptr->param->split_map[x][y] == '2')
+			if (ptr->p->split_map[x][y] == '2')
 			{
 				ptr->z[i]->x = x;
 				ptr->z[i]->y = y;
@@ -31,6 +44,7 @@ static void		push_sprite(t_ptr *ptr)
 /*
 ** Checking the number of sprites on the map
 */
+
 static void		check_nb_sprite(t_ptr *ptr)
 {
 	int x;
@@ -38,12 +52,12 @@ static void		check_nb_sprite(t_ptr *ptr)
 
 	x = 0;
 	ptr->b->nb_sprite = 0;
-	while (ptr->param->split_map[x])
+	while (ptr->p->split_map[x])
 	{
 		y = 0;
-		while (ptr->param->split_map[x][y])
+		while (ptr->p->split_map[x][y])
 		{
-			if (ptr->param->split_map[x][y] == '2')
+			if (ptr->p->split_map[x][y] == '2')
 				ptr->b->nb_sprite++;
 			y++;
 		}
@@ -54,6 +68,7 @@ static void		check_nb_sprite(t_ptr *ptr)
 /*
 ** Function for initializing the sprite structure
 */
+
 void			init_sprite_struct(t_ptr *ptr)
 {
 	int	x;

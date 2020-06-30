@@ -1,25 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_param_objects.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 12:38:13 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 12:38:16 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 void		check_param_objects(t_ptr *ptr)
 {
-	if (ptr->check->r != 1)
+	if (ptr->c->r != 1)
 		error("Set permission");
-	if (ptr->check->no != 1)
+	if (ptr->c->no != 1)
 		error("Set path north");
-	if (ptr->check->so != 1)
+	if (ptr->c->so != 1)
 		error("Set path south");
-	if (ptr->check->we != 1)
+	if (ptr->c->we != 1)
 		error("Set path west");
-	if (ptr->check->ea != 1)
+	if (ptr->c->ea != 1)
 		error("Set path east");
-	if (ptr->check->s != 1)
+	if (ptr->c->s != 1)
 		error("Set path sprite");
-	if (ptr->check->f != 1)
-		error("Set RGB floor");	
-	if (ptr->check->c != 1)
+	if (ptr->c->f != 1)
+		error("Set RGB floor");
+	if (ptr->c->c != 1)
 		error("Set RGB ceilling");
-	if (ptr->check->map != 1)
-		error("Set param map"); 
-	if (ptr->check->pos_player != 1)
+	if (ptr->c->map != 1)
+		error("Set param map");
+	if (ptr->c->pos_player != 1)
 		error("Set pos player on map");
 }

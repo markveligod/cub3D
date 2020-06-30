@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_param_objects.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ckakuna <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/30 11:24:39 by ckakuna           #+#    #+#             */
+/*   Updated: 2020/06/30 11:24:47 by ckakuna          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../cub.h"
 
 /*
 ** Start function for getting all data from a file
 */
+
 void			get_param_objects(int fd, t_ptr *ptr)
 {
 	int		count;
@@ -20,7 +33,7 @@ void			get_param_objects(int fd, t_ptr *ptr)
 			i++;
 		if (line[i] == '1' || line[i] == '0' || line[i] == '2')
 		{
-			ptr->check->map++;
+			ptr->c->map++;
 			get_param_map(fd, line, ptr);
 			break ;
 		}
