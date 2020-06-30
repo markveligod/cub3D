@@ -107,6 +107,8 @@ void			match_to_match(char **arr, t_ptr *ptr)
 
 	i = 0;
 	init_match_struct(ptr);
+	check_up_down_line(ptr);
+	check_vert_map(ptr, arr);
 	while (arr[i])
 	{
 		if (i == 0)
@@ -114,12 +116,6 @@ void			match_to_match(char **arr, t_ptr *ptr)
 			push_line_up(arr[i], ptr, 0);
 			i++;
 			continue ;
-		}
-		if (arr[i + 1] == NULL)
-		{
-			push_next(arr[i], ptr);
-			check_match(ptr);
-			return ;
 		}
 		push_next(arr[i], ptr);
 		check_match(ptr);

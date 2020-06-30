@@ -195,6 +195,8 @@ void			match_to_match(char **arr, t_ptr *ptr);
 int				check_black(t_ptr *ptr);
 void			check_dist_sprite(t_ptr *ptr);
 void			check_draw_sprite(t_ptr *ptr);
+void			check_up_down_line(t_ptr *ptr);
+void			check_vert_map(t_ptr *ptr, char **arr);
 
 /*
 ** Prototype get param obj
