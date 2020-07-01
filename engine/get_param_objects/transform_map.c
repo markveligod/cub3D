@@ -64,6 +64,30 @@ static char		**push_param_map(char **new, char **arr)
 	return (check_new(new));
 }
 
+static int		max_value(char **arr)
+{
+	int res;
+	int temp;
+	int i;
+	int j;
+
+	i = 0;
+	temp = 0;
+	while (arr[i])
+	{
+		j = 0;
+		while (arr[i][j])
+			j++;
+		if (j > temp)
+		{
+			temp = j;
+			res = i;
+		}
+		i++;
+	}
+	return (res);
+}
+
 char			**transform_split_map(char **arr)
 {
 	int		i;
@@ -72,7 +96,7 @@ char			**transform_split_map(char **arr)
 	char	**new_arr;
 
 	size_gorz = check_size_arr(arr);
-	size_vert = ft_strlen(arr[0]);
+	size_vert = ft_strlen(arr[max_value(arr)]);
 	if (!(new_arr = (char **)malloc(sizeof(char *) * (size_vert + 1))))
 		return (NULL);
 	i = 0;
