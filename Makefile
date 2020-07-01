@@ -1,4 +1,4 @@
-NAME = cub3d_game
+NAME = cub3D
 FLAGS = -Wall -Werror -Wextra -fsanitize=address -lmlx -framework OpenGL -framework AppKit
 HDRS = ./cub.h
 SRC = ./cub.c ./engine/error.c
@@ -24,9 +24,9 @@ clean:
 	@echo "\033[90m[\033[91mDeleting\033[90m]\033[31m Object files deleted\033[0m"
 
 fclean: clean
-	@/bin/rm -f cub3d_picture.bmp cub3d_game
-	@echo "\033[90m[\033[91mDeleting\033[90m]\033[31m cub3d_picture deleted.\033[0m"
-	@echo "\033[90m[\033[91mDeleting\033[90m]\033[31m cub3d_game deleted.\033[0m"
+	@/bin/rm -f cub3D.bmp cub3D
+	@echo "\033[90m[\033[91mDeleting\033[90m]\033[31m cub3D.bmp deleted.\033[0m"
+	@echo "\033[90m[\033[91mDeleting\033[90m]\033[31m cub3D deleted.\033[0m"
 
 re: fclean all
 

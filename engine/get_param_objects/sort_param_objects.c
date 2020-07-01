@@ -41,15 +41,15 @@ static void		get_resolution(char *line, t_ptr *ptr)
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	ptr->p->x = ft_atoi(&line[i]);
-	if (ptr->p->x > 1920)
-		ptr->p->x = 1920;
+	if (ptr->p->x > 2560)
+		ptr->p->x = 2560;
 	else if (ptr->p->x <= 0)
 		error("Set a normal width!!! (-_-)");
 	while (line[i] >= '0' && line[i] <= '9')
 		i++;
 	ptr->p->y = ft_atoi(&line[i]);
-	if (ptr->p->y > 1080)
-		ptr->p->y = 1080;
+	if (ptr->p->y > 1440)
+		ptr->p->y = 1440;
 	else if (ptr->p->y <= 0)
 		error("Set a normal HEIGHT (-_-)");
 	ptr->c->r++;

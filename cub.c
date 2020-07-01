@@ -98,7 +98,7 @@ static void		creaty_bmp(t_ptr *ptr, int fd, char *filename)
 	fd = open(filename, O_RDONLY);
 	start_render(ptr, fd);
 	close(fd);
-	fd = open("cub3d_picture.bmp", O_CREAT | O_RDWR, 416);
+	fd = open("cub3D.bmp", O_CREAT | O_RDWR, 416);
 	file_header = create_file_header(ptr->p->y - 1, ptr->p->x);
 	bitmap_header = create_bitmap_header(ptr->p->y - 1, ptr->p->x);
 	write(fd, file_header, 14);
