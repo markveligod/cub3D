@@ -51,16 +51,6 @@ static int		play(t_ptr *ptr)
 
 void			start_game(t_ptr *p)
 {
-	init_game_struct(p);
-	add_text(p, 1, ft_strtrim(p->p->nr, " "));
-	add_text(p, 2, ft_strtrim(p->p->so, " "));
-	add_text(p, 3, ft_strtrim(p->p->we, " "));
-	add_text(p, 4, ft_strtrim(p->p->ea, " "));
-	add_text(p, 5, ft_strtrim(p->p->sp, " "));
-	init_game_param(p);
-	init_dda_struct(p);
-	p->m->win_ptr = mlx_new_window(p->m->mlx_ptr, p->p->x,
-	p->p->y, "CUB3D GAME");
 	mlx_hook(p->m->win_ptr, 17, 1L << 0, close_win, (void *)0);
 	mlx_hook(p->m->win_ptr, 2, 5, control_keys, p);
 	mlx_loop_hook(p->m->mlx_ptr, play, p);

@@ -49,6 +49,7 @@ typedef struct	s_paramobj
 	char		dir_pl;
 	char		*line_map;
 	char		**split_map;
+	char		**trans_map;
 }				t_paramobj;
 
 typedef struct	s_player
@@ -181,7 +182,7 @@ int				get_next_line(int fd, char **line);
 char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 char			*ft_strtrim(char const *s1, char const *set);
-int				ft_strncmp(const char *str1, const char *str2, size_t n);
+int				ft_strcmp(char *s1, char *s2);
 
 /*
 ** Prototype check
@@ -195,8 +196,9 @@ void			match_to_match(char **arr, t_ptr *ptr);
 int				check_black(t_ptr *ptr);
 void			check_dist_sprite(t_ptr *ptr);
 void			check_draw_sprite(t_ptr *ptr);
-void			check_up_down_line(t_ptr *ptr);
+void			check_up_down_line(char **arr);
 void			check_vert_map(t_ptr *ptr, char **arr);
+void			check_player(char **map);
 
 /*
 ** Prototype get param obj
@@ -208,6 +210,8 @@ void			sort_param_objects(char *line, t_ptr *ptr);
 void			get_param_map(int fd, char *line, t_ptr *ptr);
 void			push_param_object(char **param, char *line);
 void			init_sprite_struct(t_ptr *ptr);
+char			**transform_split_map(char **arr);
+void			init_match_struct(t_ptr *ptr);
 
 /*
 ** Prototype dda param

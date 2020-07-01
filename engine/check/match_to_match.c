@@ -16,7 +16,7 @@
 ** Function to initialize the structure match to match
 */
 
-static void		init_match_struct(t_ptr *ptr)
+void			init_match_struct(t_ptr *ptr)
 {
 	if (!(ptr->mt = (t_match *)malloc(sizeof(t_match))))
 		error("struct check doesn't allocate in memory (*_*)");
@@ -39,13 +39,17 @@ static void		push_line_up(char *line, t_ptr *ptr, int j)
 	while (line[j] != '1')
 		j++;
 	ptr->mt->line_up_1 = j;
-	ptr->mt->line_up_3 = j;
+	while (line[j] == '1')
+		j++;
+	ptr->mt->line_up_2 = j - 1;
 	while (line[j])
 		j++;
 	while (line[j] != '1')
 		j--;
-	ptr->mt->line_up_2 = j;
 	ptr->mt->line_up_4 = j;
+	while (line[j] == '1')
+		j--;
+	ptr->mt->line_up_3 = j + 1;
 }
 
 /*
@@ -84,12 +88,12 @@ static void		check_match(t_ptr *ptr)
 	ptr->mt->line_down_2 < (ptr->mt->line_up_1 - 1)) ||
 	(ptr->mt->line_down_1 > (ptr->mt->line_up_2 + 1) &&
 	ptr->mt->line_down_2 > (ptr->mt->line_up_2 + 1)))
-		error("The left edge does not close the map. (@_@)");
+		error("The card is not covered by walls or (1111111). (@_@)");
 	if ((ptr->mt->line_down_3 < (ptr->mt->line_up_3 - 1) &&
 	ptr->mt->line_down_4 < (ptr->mt->line_up_3 - 1)) ||
 	(ptr->mt->line_down_3 > (ptr->mt->line_up_4 + 1) &&
 	ptr->mt->line_down_4 > (ptr->mt->line_up_4 + 1)))
-		error("The right edge does not close the map. (@_@)");
+		error("The card is not covered by walls or (1111111). (@_@)");
 	ptr->mt->line_up_1 = ptr->mt->line_down_1;
 	ptr->mt->line_up_2 = ptr->mt->line_down_2;
 	ptr->mt->line_up_3 = ptr->mt->line_down_3;
@@ -106,9 +110,7 @@ void			match_to_match(char **arr, t_ptr *ptr)
 	int j;
 
 	i = 0;
-	init_match_struct(ptr);
-	check_up_down_line(ptr);
-	check_vert_map(ptr, arr);
+	check_up_down_line(arr);
 	while (arr[i])
 	{
 		if (i == 0)

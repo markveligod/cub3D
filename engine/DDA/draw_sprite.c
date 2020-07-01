@@ -64,8 +64,8 @@ void			draw_sprite(t_ptr *ptr)
 	check_dist_sprite(ptr);
 	while (i < ptr->b->nb_sprite)
 	{
-		ptr->b->spritex = ptr->z[i]->x - ptr->pl->p_x;
-		ptr->b->spritey = ptr->z[i]->y - ptr->pl->p_y;
+		ptr->b->spritex = ptr->z[i]->x - ptr->pl->p_x + 0.5;
+		ptr->b->spritey = ptr->z[i]->y - ptr->pl->p_y + 0.5;
 		ptr->b->invdet = 1.0 / (ptr->pl->pl_x * ptr->pl->d_y -
 		ptr->pl->d_x * ptr->pl->pl_y);
 		ptr->b->transformx = ptr->b->invdet * (ptr->pl->d_y *

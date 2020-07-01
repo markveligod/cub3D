@@ -46,6 +46,29 @@ static void		push_img_to_bmp(t_ptr *ptr, int fd)
 }
 
 /*
+** Pre-initialization to prevent memory leak
+*/
+
+static void		before_game_init(t_ptr *p)
+{
+	check_player(p->p->split_map);
+	init_match_struct(p);
+	match_to_match(p->p->split_map, p);
+	p->p->trans_map = transform_split_map(p->p->split_map);
+	match_to_match(p->p->trans_map, p);
+	init_game_struct(p);
+	add_text(p, 1, ft_strtrim(p->p->nr, " "));
+	add_text(p, 2, ft_strtrim(p->p->so, " "));
+	add_text(p, 3, ft_strtrim(p->p->we, " "));
+	add_text(p, 4, ft_strtrim(p->p->ea, " "));
+	add_text(p, 5, ft_strtrim(p->p->sp, " "));
+	init_game_param(p);
+	init_dda_struct(p);
+	p->m->win_ptr = mlx_new_window(p->m->mlx_ptr, p->p->x,
+	p->p->y, "CUB3D GAME");
+}
+
+/*
 ** A function that draws a single frame
 */
 
@@ -53,17 +76,7 @@ static void		start_render(t_ptr *ptr, int fd)
 {
 	init_check_struct(ptr);
 	get_param_objects(fd, ptr);
-	match_to_match(ptr->p->split_map, ptr);
-	init_game_struct(ptr);
-	add_text(ptr, 1, ft_strtrim(ptr->p->nr, " "));
-	add_text(ptr, 2, ft_strtrim(ptr->p->so, " "));
-	add_text(ptr, 3, ft_strtrim(ptr->p->we, " "));
-	add_text(ptr, 4, ft_strtrim(ptr->p->ea, " "));
-	add_text(ptr, 5, ft_strtrim(ptr->p->sp, " "));
-	init_game_param(ptr);
-	init_dda_struct(ptr);
-	ptr->m->win_ptr = mlx_new_window(ptr->m->mlx_ptr, ptr->p->x,
-	ptr->p->y, "CUB3D GAME");
+	before_game_init(ptr);
 	ptr->img[0]->img_ptr = mlx_new_image(ptr->m->mlx_ptr, ptr->p->x,
 	ptr->p->y);
 	ptr->img[0]->img_data = mlx_get_data_addr(ptr->img[0]->img_ptr,
@@ -110,7 +123,7 @@ int				main(int ac, char **av)
 		{
 			init_check_struct(&ptr);
 			get_param_objects(open(av[1], O_RDONLY), &ptr);
-			match_to_match(ptr.p->split_map, &ptr);
+			before_game_init(&ptr);
 			start_game(&ptr);
 		}
 		else
@@ -118,9 +131,9 @@ int				main(int ac, char **av)
 	}
 	else if (ac == 3)
 	{
-		if (((ft_strncmp(av[2], "--save", ft_strlen("--save") == 0) ||
-		ft_strncmp(av[1], "--save", ft_strlen("--save") == 0)) &&
-		(check_filename(av[1]) || check_filename(av[2]))))
+		if (((ft_strcmp(av[2], "--save") == 0) ||
+		(ft_strcmp(av[1], "--save") == 0)) &&
+		(check_filename(av[1]) || check_filename(av[2])))
 			creaty_bmp(&ptr, fd, (check_filename(av[1])) ? av[1] : av[2]);
 	}
 	else
