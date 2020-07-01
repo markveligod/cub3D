@@ -2,7 +2,7 @@ NAME = cub3D
 FLAGS = -Wall -Werror -Wextra -fsanitize=address -lmlx -framework OpenGL -framework AppKit
 HDRS = ./cub.h
 SRC = ./cub.c ./engine/error.c
-SRC_UTILS = ./utils/ft_strcmp.c ./utils/ft_atoi.c ./utils/ft_putstr_fd.c ./utils/ft_strjoin.c ./utils/ft_strlen.c ./utils/get_next_line.c ./utils/ft_strlcpy.c ./utils/ft_split.c ./utils/ft_bzero.c ./utils/ft_strtrim.c
+SRC_UTILS = ./utils/ft_array_max_value.c ./utils/ft_size_array.c ./utils/ft_strcmp.c ./utils/ft_atoi.c ./utils/ft_putstr_fd.c ./utils/ft_strjoin.c ./utils/ft_strlen.c ./utils/get_next_line.c ./utils/ft_strlcpy.c ./utils/ft_split.c ./utils/ft_bzero.c ./utils/ft_strtrim.c
 SRC_CHECK = ./engine/check/check_sprite.c ./engine/check/check_filename.c ./engine/check/init_check_struct.c ./engine/check/check_line_map.c ./engine/check/check_param_objects.c ./engine/check/match_to_match.c
 SRC_GET = ./engine/get_param_objects/transform_map.c ./engine/get_param_objects/get_sprite.c ./engine/get_param_objects/get_param_map.c ./engine/get_param_objects/get_param_objects.c ./engine/get_param_objects/init_param_objects.c ./engine/get_param_objects/sort_param_objects.c
 SRC_GAME = ./engine/game/game.c ./engine/game/init_game_struct.c ./engine/game/game_control_keys.c ./engine/game/bitmap.c

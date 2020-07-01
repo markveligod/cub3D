@@ -12,14 +12,42 @@
 
 #include "../../cub.h"
 
-static int		check_size_arr(char **arr)
+void			check_space_map(char **arr)
 {
 	int i;
+	int j;
 
 	i = 0;
-	while (arr[i] != NULL)
+	while (arr[i])
+	{
+		j = 0;
+		while (arr[i][j])
+		{
+			if (arr[i][j] == ' ')
+				error("Space input map");
+			j++;
+		}
 		i++;
-	return (i);
+	}
+}
+
+char			**transform_space_map(char **arr)
+{
+	char	**new_arr;
+	int		size_vert;
+	int		i;
+
+	size_vert = ft_size_array(arr);
+	if (!(new_arr = (char **)malloc(sizeof(char *) * (size_vert + 1))))
+		return (NULL);
+	i = 0;
+	while (arr[i])
+	{
+		new_arr[i] = ft_strtrim(arr[i], " ");
+		i++;
+	}
+	new_arr[i] = NULL;
+	return(new_arr);
 }
 
 static char		**check_new(char **new)
@@ -64,30 +92,6 @@ static char		**push_param_map(char **new, char **arr)
 	return (check_new(new));
 }
 
-static int		max_value(char **arr)
-{
-	int res;
-	int temp;
-	int i;
-	int j;
-
-	i = 0;
-	temp = 0;
-	while (arr[i])
-	{
-		j = 0;
-		while (arr[i][j])
-			j++;
-		if (j > temp)
-		{
-			temp = j;
-			res = i;
-		}
-		i++;
-	}
-	return (res);
-}
-
 char			**transform_split_map(char **arr)
 {
 	int		i;
@@ -95,8 +99,8 @@ char			**transform_split_map(char **arr)
 	int		size_gorz;
 	char	**new_arr;
 
-	size_gorz = check_size_arr(arr);
-	size_vert = ft_strlen(arr[max_value(arr)]);
+	size_gorz = ft_size_array(arr);
+	size_vert = ft_strlen(arr[ft_array_max_value(arr)]);
 	if (!(new_arr = (char **)malloc(sizeof(char *) * (size_vert + 1))))
 		return (NULL);
 	i = 0;

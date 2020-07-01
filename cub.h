@@ -50,6 +50,7 @@ typedef struct	s_paramobj
 	char		*line_map;
 	char		**split_map;
 	char		**trans_map;
+	char		**space_map;
 }				t_paramobj;
 
 typedef struct	s_player
@@ -183,6 +184,8 @@ char			**ft_split(char const *s, char c);
 size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 char			*ft_strtrim(char const *s1, char const *set);
 int				ft_strcmp(char *s1, char *s2);
+int				ft_size_array(char **arr);
+int				ft_array_max_value(char **arr);
 
 /*
 ** Prototype check
@@ -212,6 +215,8 @@ void			push_param_object(char **param, char *line);
 void			init_sprite_struct(t_ptr *ptr);
 char			**transform_split_map(char **arr);
 void			init_match_struct(t_ptr *ptr);
+char			**transform_space_map(char **arr);
+void			check_space_map(char **arr);
 
 /*
 ** Prototype dda param
