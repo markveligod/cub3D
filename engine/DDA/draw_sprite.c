@@ -60,7 +60,6 @@ void			draw_sprite(t_ptr *ptr)
 	int i;
 
 	i = 0;
-	init_sprite_struct(ptr);
 	check_dist_sprite(ptr);
 	while (i < ptr->b->nb_sprite)
 	{

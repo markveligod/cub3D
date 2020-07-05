@@ -35,10 +35,6 @@ static int		control_keys(int key, t_ptr *ptr)
 
 static int		play(t_ptr *ptr)
 {
-	ptr->img[0]->img_ptr = mlx_new_image(ptr->m->mlx_ptr,
-	ptr->p->x, ptr->p->y);
-	ptr->img[0]->img_data = mlx_get_data_addr(ptr->img[0]->img_ptr,
-	&ptr->img[0]->bpp, &ptr->img[0]->size_line, &ptr->img[0]->endian);
 	run_dda(ptr);
 	mlx_put_image_to_window(ptr->m->mlx_ptr, ptr->m->win_ptr,
 	ptr->img[0]->img_ptr, 0, 0);

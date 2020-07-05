@@ -66,8 +66,13 @@ static void		before_game_init(t_ptr *p)
 	add_text(p, 5, ft_strtrim(p->p->sp, " "));
 	init_game_param(p);
 	init_dda_struct(p);
+	init_sprite_struct(p);
 	p->m->win_ptr = mlx_new_window(p->m->mlx_ptr, p->p->x,
 	p->p->y, "cub3D");
+	p->img[0]->img_ptr = mlx_new_image(p->m->mlx_ptr,
+	p->p->x, p->p->y);
+	p->img[0]->img_data = mlx_get_data_addr(p->img[0]->img_ptr,
+	&p->img[0]->bpp, &p->img[0]->size_line, &p->img[0]->endian);
 }
 
 /*
