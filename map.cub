@@ -3,7 +3,7 @@ NO ./texture/WALL46.xpm
 SO ./texture/WALL2.xpm
 WE ./texture/WALL0.xpm
 EA ./texture/WALL4.xpm
-S ./texture/greenlight.xpm
+S ./texture/cat.xpm
 F 100,100,100
 C 80,80,80
 
