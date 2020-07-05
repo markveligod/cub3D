@@ -1,4 +1,4 @@
-R 600 400
+R 900 680
 NO ./texture/WALL46.xpm
 SO ./texture/WALL2.xpm
 WE ./texture/WALL0.xpm

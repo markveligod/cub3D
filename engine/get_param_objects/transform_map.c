@@ -47,7 +47,7 @@ char			**transform_space_map(char **arr)
 		i++;
 	}
 	new_arr[i] = NULL;
-	return(new_arr);
+	return (new_arr);
 }
 
 static char		**check_new(char **new)
