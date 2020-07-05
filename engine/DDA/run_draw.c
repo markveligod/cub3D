@@ -12,7 +12,7 @@
 
 #include "../../cub.h"
 
-static int		draw_ceilling(t_ptr *p, int y)
+int				draw_ceilling(t_ptr *p, int y)
 {
 	int r;
 	int g;
@@ -36,7 +36,7 @@ static int		draw_ceilling(t_ptr *p, int y)
 	return (y);
 }
 
-static void		draw_floor(t_ptr *p, int y)
+void			draw_floor(t_ptr *p, int y)
 {
 	int r;
 	int g;
@@ -59,7 +59,7 @@ static void		draw_floor(t_ptr *p, int y)
 	}
 }
 
-static void		set_texture(t_ptr *p)
+void			set_texture(t_ptr *p)
 {
 	if (p->dda->side == 1 || p->dda->side == 2)
 	{
@@ -81,7 +81,7 @@ static void		set_texture(t_ptr *p)
 	}
 }
 
-static int		draw_texture(t_ptr *p, int y)
+int				draw_texture(t_ptr *p, int y)
 {
 	int i;
 

@@ -16,7 +16,7 @@
 ** Function that tracks keystrokes
 */
 
-static int		control_keys(int key, t_ptr *ptr)
+int				control_keys(int key, t_ptr *ptr)
 {
 	if (key == 53)
 		close_win();
@@ -33,7 +33,7 @@ static int		control_keys(int key, t_ptr *ptr)
 ** Function to start rendering frames in the image array
 */
 
-static int		play(t_ptr *ptr)
+int				play(t_ptr *ptr)
 {
 	run_dda(ptr);
 	mlx_put_image_to_window(ptr->m->mlx_ptr, ptr->m->win_ptr,

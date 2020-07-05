@@ -12,7 +12,7 @@
 
 #include "../../cub.h"
 
-static void		put_pixel(t_ptr *ptr, int y)
+void			put_pixel(t_ptr *ptr, int y)
 {
 	ptr->img[0]->img_data[ptr->b->stripe * ptr->img[0]->bpp / 8 +
 	ptr->img[0]->size_line * y] = ptr->img[5]->img_data[ptr->img[5]->size_line
@@ -27,7 +27,7 @@ static void		put_pixel(t_ptr *ptr, int y)
 	ptr->img[5]->bpp / 8) + 2];
 }
 
-static void		put_sprite(t_ptr *ptr)
+void			put_sprite(t_ptr *ptr)
 {
 	int y;
 

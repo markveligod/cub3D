@@ -12,7 +12,7 @@
 
 #include "../../cub.h"
 
-static void		is_side(t_ptr *ptr)
+void			is_side(t_ptr *ptr)
 {
 	ptr->dda->hit = 1;
 	if (!ptr->dda->side)
@@ -31,7 +31,7 @@ static void		is_side(t_ptr *ptr)
 	}
 }
 
-static void		check_dist(t_ptr *ptr)
+void			check_dist(t_ptr *ptr)
 {
 	ptr->dda->hit = 0;
 	ptr->dda->side = 0;
@@ -60,7 +60,7 @@ static void		check_dist(t_ptr *ptr)
 			(1 - ptr->dda->stepy) / 2) / ptr->dda->raydir_y;
 }
 
-static void		check_side(t_ptr *ptr)
+void			check_side(t_ptr *ptr)
 {
 	if (ptr->dda->raydir_x < 0)
 	{
@@ -88,7 +88,7 @@ static void		check_side(t_ptr *ptr)
 	}
 }
 
-static void		calc_dda(t_ptr *ptr)
+void			calc_dda(t_ptr *ptr)
 {
 	ptr->dda->cam_x = 2 * (double)ptr->dda->screenx / (double)ptr->p->x - 1;
 	ptr->dda->raydir_x = ptr->pl->d_x + ptr->pl->pl_x * ptr->dda->cam_x;
